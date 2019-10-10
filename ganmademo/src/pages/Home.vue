@@ -1,6 +1,6 @@
 <template>
     <div>
-        sadsad
+   dsad
     </div>
 </template>
 
@@ -10,19 +10,9 @@ export default {
     // 发起ajax请求
     let sessionId = ''
     let recId = ''
-    let data = await this.$axios.post("https://api.wzq998.com/api/brand/detail",
-         {
-        data: data,
-      
-    },
-    {
-        headers: {
-
-            'Authorization': 'Bearer ' ,
-            "Cookie" : 'sessionId=' + sessionId + '; recId=' + recId,
+    let data = await this.$axios.get("https://api.wzq998.com/api/index/guess?token=&mac_no=&page=2&pageSize=6",
     
-        }
-    }
+    
 
     );
     console.log(data)
