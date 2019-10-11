@@ -7,7 +7,7 @@
       </p>
     </div>
     <div class="class-body">
-      <div class="row-left" style="height: 478.4px;">
+      <div class="row-left" style="height: 590.4px;">
         <div
           class="ps"
           v-for="(item,idx) in datalist"
@@ -363,9 +363,6 @@ export default {
 </script>
 
 <style lang="scss"  scoped>
-p {
-  margin: 0;
-}
 #class-head {
   position: relative;
   width: 100%;

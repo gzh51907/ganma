@@ -5,7 +5,8 @@ Vue.use(VueRouter);
 
 //这个是主页的组件
 import Home from '../pages/Home.vue';
-
+//分类
+import Classify from '../pages/classify.vue'
 
 
 //这里面可以添加要跳转的路径
@@ -19,6 +20,12 @@ let router = new VueRouter({
         {
             path: '/',  
             redirect: '/home'
+        },
+        {
+            name:'classify',
+            path:'/classify',
+            component:Classify
+
         }
     ]
 })
