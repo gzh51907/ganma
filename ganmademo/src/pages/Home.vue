@@ -309,11 +309,11 @@ export default {
       "https://api.wzq998.com/api/index/guess?token=&mac_no=&page=2&pageSize=90"
     );
     let listshopomg = data.data.list;
-    // console.log(listshopomg)
+  
    this.datalist = listshopomg.map(item=>{
      return item
    })
-    console.log(this.datalist);
+ 
   }
 };
 </script>
@@ -332,10 +332,7 @@ export default {
 .sou {
   border: none;
   border-color: white;
-  /* width: 100%;
-    font-size: 0.74666667rem;
-    padding: 0.18rem 0 0.18rem 2rem;
-    background: white; */
+ 
   border-bottom: 1px solid black;
 }
 
