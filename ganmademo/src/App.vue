@@ -65,6 +65,7 @@ export default {
           dis: false
         },
         {
+          path:'/mine',
           id: "5",
           img:
             "https://api.wzq998.com/Forestproducts/public/static/api/img/bt_nav41.png",
