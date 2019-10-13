@@ -77,7 +77,12 @@
 </template>
 
 <script>
-export default {};
+export default {
+  created(){
+    let {id} = this.$route.params
+    console.log(id)
+  }
+};
 </script>
 <style lang="scss" scoped>
 * {

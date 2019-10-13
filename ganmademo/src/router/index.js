@@ -17,9 +17,14 @@ import Login from '../pages/Login.vue';
 import Reg from '../pages/Reg.vue';
 import Details from '../pages/Details.vue'
 import Cart from '../pages/Cart.vue'
+import Housing from '../pages/Housing.vue'
 //这里面可以添加要跳转的路径
 let router = new VueRouter({
     routes: [{
+        name: 'housing',
+        path: '/housing',
+        component: Housing
+    },{
         name: 'cart',
         path: '/cart',
         component: Cart
@@ -46,7 +51,7 @@ let router = new VueRouter({
         },
         {
             name: 'lists',
-            path: '/lists',
+            path: '/lists/:id',
             component: List
         },
         // 我的
