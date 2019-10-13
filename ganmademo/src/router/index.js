@@ -7,6 +7,12 @@ Vue.use(VueRouter);
 import Home from '../pages/Home.vue';
 //分类
 import Classify from '../pages/classify.vue'
+//我的
+import Mine from '../pages/Mine.vue';
+// 登录
+import Login from '../pages/Login.vue';
+// 注册
+import Reg from '../pages/Reg.vue';
 
 
 //这里面可以添加要跳转的路径
@@ -26,6 +32,27 @@ let router = new VueRouter({
             path:'/classify',
             component:Classify
 
+        },
+
+        // 我的
+        {
+            name : 'mine',
+            path : '/mine',
+            component : Mine
+        },
+
+        //登录
+        {
+            name : 'login',
+            path : '/login',
+            component : Login
+        },
+
+         //注册
+         {
+            name : 'reg',
+            path : '/reg',
+            component : Reg
         }
     ]
 })
