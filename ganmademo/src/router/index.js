@@ -7,7 +7,9 @@ Vue.use(VueRouter);
 import Home from '../pages/Home.vue';
 //分类
 import Classify from '../pages/classify.vue'
+import Details from '../pages/Details.vue'
 
+import Cart from '../pages/Cart.vue'
 
 //这里面可以添加要跳转的路径
 let router = new VueRouter({
@@ -25,6 +27,19 @@ let router = new VueRouter({
             name:'classify',
             path:'/classify',
             component:Classify
+
+        },
+        {
+            name: 'Details',
+            path: '/Details',
+            component: Details
+
+        }
+        ,
+        {
+            name: 'cart',
+            path: '/cart',
+            component: Cart
 
         }
     ]
