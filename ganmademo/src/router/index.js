@@ -7,7 +7,8 @@ Vue.use(VueRouter);
 import Home from '../pages/Home.vue';
 //分类
 import Classify from '../pages/classify.vue'
-
+//列表
+import List from '../pages/lists.vue'
 
 //这里面可以添加要跳转的路径
 let router = new VueRouter({
@@ -26,6 +27,11 @@ let router = new VueRouter({
             path:'/classify',
             component:Classify
 
+        },
+        {
+            name:'lists',
+            path:'/lists',
+            component:List
         }
     ]
 })
