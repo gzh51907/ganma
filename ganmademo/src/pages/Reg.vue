@@ -13,7 +13,7 @@
             </p>
             <div class="user">
                 <i class="el-icon-mobile-phone"></i>
-                <input type="text" placeholder="手机号" class="username">
+                <input type="text" placeholder="用户名" class="username">
             </div>
             <div class="yzm">
                 <i class="el-icon-circle-check"></i>

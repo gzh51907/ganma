@@ -3,16 +3,13 @@
         <div class="con">
             <div class="header">
                 <el-image style="width: 100%" src="https://api.wzq998.com/Forestproducts/public/static/api/img/self_back.png" class="h_bj"></el-image>
-                <!-- <img src="https://api.wzq998.com/Forestproducts/public/static/api/img/self_back.png" alt="" class="h_bj"> -->
-                <!-- <p class="h_img"></p> -->        
+               
                     <i class="el-icon-setting" ></i>
                 <div>
                     <el-image src="https://api.wzq998.com/Forestproducts/public/static/api/img/self_head.png" alt="" class="tx"></el-image>
-                    <!-- <img src="https://api.wzq998.com/Forestproducts/public/static/api/img/self_head.png" alt="" class="tx"> -->
+               
                     <p class="login_reg">
-                         
-                        <!-- <el-button type="text">登录</el-button>
-                        <el-button type="text" disabled>注册</el-button>  -->
+                  
                         <span>登录</span>
                         <span>/</span>
                         <span>注册</span>

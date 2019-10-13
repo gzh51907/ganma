@@ -16,7 +16,7 @@
             </p>
             <div class="user">
                 <i class="el-icon-mobile-phone"></i>
-                <input type="text" placeholder="请输入手机号" class="username">
+                <input type="text" placeholder="请输入用户名" class="username">
             </div>
             <div class="paw">
                 <i class="el-icon-unlock"></i>
