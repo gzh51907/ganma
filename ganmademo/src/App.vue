@@ -45,6 +45,7 @@ export default {
           dis: false
         },
         {
+   
           id: "3",
           img:
             "https://api.wzq998.com/Forestproducts/public/static/api/img/bt_nav51.png",
@@ -54,6 +55,7 @@ export default {
           dis: false
         },
         {
+          path:'/cart',
           id: "4",
           img:
             "https://api.wzq998.com/Forestproducts/public/static/api/img/bt_nav31.png",
@@ -75,8 +77,8 @@ export default {
     };
   },
   methods: {
-    goto(path){
-      this.$router.push(path)
+    goto(path) {
+      this.$router.push(path);
     },
     istrim(id) {
       //  console.log(index)
@@ -86,11 +88,8 @@ export default {
           console.log(item.dis);
         } else {
           item.dis = false;
-
-    
         }
       });
-
     }
   }
 };
