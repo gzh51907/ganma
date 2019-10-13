@@ -3,9 +3,9 @@
     <div>
       <router-view />
     </div>
-    <el-row :gutter="20" class="dibu" style="background:white">
+    <el-row :gutter="20" class="dibu" style="background:white;width:100%;margin:0">
       <el-col style="width:20%" v-for="item in databottom" :key="item.img">
-        <div class="grid-content bg-purple">
+        <div class="grid-content bg-purple" @click="goto(item.path)">
           <p class="p1">
             <img :src="item.img" alt @click="istrim(item.id)" v-if="!item.dis" />
             <img :src="item.img1" alt v-else />
@@ -23,6 +23,8 @@ export default {
     return {
       databottom: [
         {
+          name: "home",
+          path: "/home",
           id: "1",
           img1:
             "https://api.wzq998.com/Forestproducts/public/static/api/img/bt_nav12.png",
@@ -32,6 +34,8 @@ export default {
           dis: true
         },
         {
+          path: "/classify",
+          name: "classify",
           id: "2",
           img:
             "https://api.wzq998.com/Forestproducts/public/static/api/img/bt_nav21.png",
@@ -41,6 +45,7 @@ export default {
           dis: false
         },
         {
+   
           id: "3",
           img:
             "https://api.wzq998.com/Forestproducts/public/static/api/img/bt_nav51.png",
@@ -50,6 +55,7 @@ export default {
           dis: false
         },
         {
+          path:'/cart',
           id: "4",
           img:
             "https://api.wzq998.com/Forestproducts/public/static/api/img/bt_nav31.png",
@@ -71,27 +77,19 @@ export default {
     };
   },
   methods: {
+    goto(path) {
+      this.$router.push(path);
+    },
     istrim(id) {
       //  console.log(index)
       this.databottom.forEach(item => {
-     
         if (item.id === id) {
           item.dis = true;
           console.log(item.dis);
         } else {
           item.dis = false;
-
-          // if (item.id == "1") {
-          //   item.dis = true;
-
-          // }
         }
       });
-      //  if (id === '1') {
-      //     this.databottom.dis =  !this.databottom.dis;
-      //      console.log(this.databottom.dis)
-      //   }
-      
     }
   }
 };
