@@ -27,7 +27,7 @@
           <div class="class-item">
             <p class="title">{{item.name}}</p>
             <div class="products">
-              <div class="el-w-3" v-for="item1 in imgurl" :key="item1.id">
+              <div class="el-w-3" v-for="item1 in imgurl" :key="item1.id" @click="goinlist(item1.id)">
                 <div class="gs-item">
                   <div class="p">
                     <img :src="item1.thumb" alt />
@@ -80,6 +80,7 @@ export default {
   methods: {
     async change(id) {
       this.currentIdx = id;
+   
       let datas1 = await this.$axios.get(
         "https://api.wzq998.com/api/goods/category_v2?",
         {
@@ -91,9 +92,12 @@ export default {
       this.idx=[datas1.data.data.banner];//banner图
      datas1.data.data.list.forEach(item => {
           this.imgurl=item.child;
-        
+        console.log(this.imgurl)
       });
      
+    },
+    goinlist(id){
+      this.$router.push({name:'lists',params:{id}})
     }
   }
 };
