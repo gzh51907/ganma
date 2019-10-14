@@ -20,6 +20,8 @@ import Cart from '../pages/Cart.vue'
 import Housing from '../pages/Housing.vue'
 // 退出
 import Logout from '../pages/Logout.vue'
+//订单
+import Order from '../pages/Order.vue'
 
 //这里面可以添加要跳转的路径
 let router = new VueRouter({
@@ -83,6 +85,12 @@ let router = new VueRouter({
             name: 'logout',
             path: '/logout',
             component: Logout
+        },
+        //订单
+        {
+            name:'order',
+            path:'/order',
+            component:Order
         }
     ]
 })
