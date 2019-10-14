@@ -18,6 +18,7 @@ import Reg from '../pages/Reg.vue';
 import Details from '../pages/Details.vue'
 import Cart from '../pages/Cart.vue'
 import Housing from '../pages/Housing.vue'
+import last from '../pages/last.vue'
 // 退出
 import Logout from '../pages/Logout.vue'
 
@@ -31,10 +32,14 @@ let router = new VueRouter({
         name: 'cart',
         path: '/cart',
         component: Cart
-    },
+        }, {
+            name: 'last',
+            path: '/last',
+            component: last
+        },
         {
             name: 'details',
-            path: '/details',
+            path: '/details/:id',
             component: Details
         },
         {

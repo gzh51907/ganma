@@ -53,7 +53,7 @@
               v-for="item in menus"
               :key="item.id"
             >
-              <div class="good-item row">
+              <div class="good-item row" @click="gotofromcart(item.id)">
                 <div class="row-left">
                   <img mode="widthFix" :src="item.thumb" class="img" />
                 </div>
@@ -87,7 +87,7 @@ export default {
   },
   async created() {
     let { id } = this.$route.params;
-    console.log(id);
+
     let data = await this.$axios.get("http://localhost:5200/goods/select", {
       params: {
         brand_id: id
@@ -95,9 +95,13 @@ export default {
     });
 
     this.menus = data.data;
-    console.log(this.menus);
+     console.log(this.menus);
   },
   methods: {
+    gotofromcart(id){
+      this.$router.push('/details/'+id)
+console.log(id)
+    },
     goto(path) {
       this.$router.push(path);
     },
@@ -105,7 +109,7 @@ export default {
     async stoew() {
       if (this.num == true) {
         let { id } = this.$route.params;
-        console.log(id);
+
         let data = await this.$axios.get("http://localhost:5200/goods/sel", {
           params: {
             brand_id: id
@@ -114,10 +118,10 @@ export default {
 
         this.menus = data.data;
         this.num = false;
-        console.log(this.menus);
+  
       } else {
         let { id } = this.$route.params;
-        console.log(id);
+   
         let data = await this.$axios.get("http://localhost:5200/goods/sels", {
           params: {
             brand_id: id
@@ -126,7 +130,7 @@ export default {
         this.menus = data.data;
         this.num = true;
         
-        console.log(this.menus);
+
       }
        this.$refs.a.classList.remove("in_");
       this.$refs.b.classList.remove("in_");
@@ -135,7 +139,7 @@ export default {
     },
     async zuixin() {
       let { id } = this.$route.params;
-      console.log(id);
+
       let data = await this.$axios.get("http://localhost:5200/goods/selss", {
         params: {
           brand_id: id
@@ -147,11 +151,11 @@ export default {
       this.$refs.b.classList.remove("in_");
       this.$refs.d.classList.remove("in_");
       this.$refs.c.classList.add("in_");
-      console.log(this.menus);
+    
     },
     async xiao() {
       let { id } = this.$route.params;
-      console.log(id);
+  
       let data = await this.$axios.get("http://localhost:5200/goods/selsss", {
         params: {
           brand_id: id
@@ -166,7 +170,7 @@ export default {
     },
     async zong() {
       let { id } = this.$route.params;
-      console.log(id);
+
       let data = await this.$axios.get("http://localhost:5200/goods/select", {
         params: {
           brand_id: id
@@ -174,7 +178,7 @@ export default {
       });
 
       this.menus = data.data;
-      console.log(this.menus);
+ 
              this.$refs.d.classList.remove("in_");
       this.$refs.b.classList.remove("in_");
       this.$refs.c.classList.remove("in_");
