@@ -6,6 +6,7 @@ import lists from './lists';
 import common from './common';
 
 
+
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -14,7 +15,9 @@ const store = new Vuex.Store({
     modules:{
         app,
         lists,
-        common
+       common,
+       cart
+
  
     }
 })

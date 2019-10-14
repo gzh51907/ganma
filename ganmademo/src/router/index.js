@@ -18,10 +18,12 @@ import Reg from '../pages/Reg.vue';
 import Details from '../pages/Details.vue'
 import Cart from '../pages/Cart.vue'
 import Housing from '../pages/Housing.vue'
+import last from '../pages/last.vue'
 // 退出
 import Logout from '../pages/Logout.vue'
 import store from '../store';
 
+import Order from '../pages/Order.vue'
 //这里面可以添加要跳转的路径
 let router = new VueRouter({
     routes: [{
@@ -31,14 +33,18 @@ let router = new VueRouter({
     },{
         name: 'cart',
         path: '/cart',
-        component: Cart,
-        meta : {
+       meta : {
             requirsAuth : true
-        }
-    },
+        },
+
+              {
+            name: 'last',
+            path: '/last',
+            component: last
+        },
         {
             name: 'details',
-            path: '/details',
+            path: '/details/:id',
             component: Details
         },
         {
@@ -87,6 +93,12 @@ let router = new VueRouter({
             name: 'logout',
             path: '/logout',
             component: Logout
+        },
+        //订单
+        {
+            name:'order',
+            path:'/order',
+            component:Order
         }
     ]
 });

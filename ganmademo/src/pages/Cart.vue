@@ -17,16 +17,22 @@
           >赶马商城</span>
         </div>
 
-        <div class="cartbottom">
+        <div class="cartbottom" v-for="item in cartlist" :key="item.id">
           <div style=" width: 14.66%; padding-top: 2rem;">
             <input type="checkbox" name id class="cartbottomcheck" />
           </div>
-          <img src="https://respic.wzq998.com//uploads/goods/20190909/77ff7040608d4c15f1cf2516fdb29252.jpg" alt style="width: 26.66%; min-height: 5.2rem;margin-left:13%;margin-top:-9%" />
+          <img :src="item.img" alt style="width: 26.66%; min-height: 5.2rem;margin-left:13%;margin-top:-9%" />
           <div style="width: 50%; padding: 0 1.05rem 0 0.57rem; height: 5.26rem;float:right">
-              <p class="p01">三瓶王子清蜂蜜茶套餐 蜂蜜百香果茶+蜂蜜柠檬茶+蜂蜜柚子茶</p>
+              <p class="p01">{{item.name}}</p>
                <div class="lastone">
-              <p class="lastprice">￥29.90</p>
-              <div class="lastremove">删除</div>
+              <p class="lastprice">￥{{item.price}}</p>
+              <div class="lastremove">
+                <div style="    position: relative;float: left;width: 28%;font-size: 0.64rem;text-align: center;padding: 2px 0;">-
+                  </div>
+                  <div style="position: relative;width: 40%;top: 0;font-weight: 500;font-size: 0.64rem;border-left: 1px solid #cdcdcd;border-right: 1px solid #cdcdcd;float: left;text-align: center;padding: 2px 0;">
+                    1</div><div style="    position: relative;width:28%;font-size: 0.64rem;text-align: center;padding: 2px 0;float:left">
+                      +</div>
+              </div>
           </div>
           </div>
          
@@ -48,7 +54,16 @@
 
 
 <script>
-export default {};
+export default {
+  computed:{
+    cartlist(){
+      return this.$store.state.cart.cartlist
+    }
+
+
+
+  }
+};
 </script>
 
 
@@ -101,11 +116,12 @@ export default {};
     padding: 0 1.05rem 0 0.57rem;
     .lastremove{
             width: 3.9rem;
+border: 1px solid black;
     padding: 0.1rem;
     font-size: 0.85333333rem;
-    color: white;
+
     text-align: center;
-    background: #fa6969;    float: right;
+  float: right;
     }
     .lastprice{
         font-size: 0.74666667rem;

@@ -151,7 +151,25 @@ async function paisss(colName, query = {}) {
 }
 
 
+// 查询单个
+
+async function lp(colName, query = {}) {
+    let { db, client } = await connect();
+    let col = db.collection(colName);
+    console.log(query);
+
+    // 查询数据库
+    let result = await col.find(query).toArray();
+
+    // 关闭数据库连接
+    client.close();
+    //返回结果
+    return result;
+}
+
+
 module.exports = {
+    lp,
     paisss,
     paiss,
     pais,
