@@ -30,111 +30,115 @@ let router = new VueRouter({
         name: 'housing',
         path: '/housing',
         component: Housing
-    },{
+    }, {
         name: 'cart',
         path: '/cart',
-       meta : {
-            requirsAuth : true
+        component: Cart,
+        meta: {
+            requirsAuth: true
         },
 
-              {
-            name: 'last',
-            path: '/last',
-            component: last
-        },
-        {
-            name: 'details',
-            path: '/details/:id',
-            component: Details
-        },
-        {
-            name: 'home',
-            path: '/home',
-            component: Home
-        },
-        {
-            path: '/',
-            redirect: '/home'
-        },
-        {
-            name: 'classify',
-            path: '/classify',
-            component: Classify
+    },
 
-        },
-        {
-            name: 'lists',
-            path: '/lists/:id',
-            component: List
-        },
-        // 我的
-        {
-            name: 'mine',
-            path: '/mine',
-            component: Mine
-        },
+    {
+        name: 'last',
+        path: '/last',
+        component: last
+    },
 
-        //登录
-        {
-            name: 'login',
-            path: '/login',
-            component: Login
-        },
+    {
+        name: 'details',
+        path: '/details/:id',
+        component: Details
+    },
+    {
+        name: 'home',
+        path: '/home',
+        component: Home
+    },
+    {
+        path: '/',
+        redirect: '/home'
+    },
+    {
+        name: 'classify',
+        path: '/classify',
+        component: Classify
 
-        //注册
-        {
-            name: 'reg',
-            path: '/reg',
-            component: Reg
-        },
+    },
+    {
+        name: 'lists',
+        path: '/lists/:id',
+        component: List
+    },
+    // 我的
+    {
+        name: 'mine',
+        path: '/mine',
+        component: Mine
+    },
 
-        //退出
-        {
-            name: 'logout',
-            path: '/logout',
-            component: Logout
-        },
-        //订单
-        {
-            name:'order',
-            path:'/order',
-            component:Order
-        }
+    //登录
+    {
+        name: 'login',
+        path: '/login',
+        component: Login
+    },
+
+    //注册
+    {
+        name: 'reg',
+        path: '/reg',
+        component: Reg
+    },
+
+    //退出
+    {
+        name: 'logout',
+        path: '/logout',
+        component: Logout
+    },
+    //订单
+    {
+        name: 'order',
+        path: '/order',
+        component: Order
+    }
     ]
 });
 //这里用来判断是否登录允许进入购物车或者其他
 //设置全局路由守卫
-router.beforeEach(async function(to,from,next) {
-    
-    if(to.meta.requirsAuth) {
+router.beforeEach(async function (to, from, next) {
+
+    if (to.meta.requirsAuth) {
         let user = localStorage.getItem('user');
         // console.log('55444')
-        if(user) {
+        if (user) {
             let res = await store.dispatch('checkLogin');
             // console.log('res:',res);
-            if(res === 400) {
-                console.log('to.fullPath:',to.fullPath)
+            if (res === 400) {
+                console.log('to.fullPath:', to.fullPath)
                 next({
-                    path : '/login',
-                    query : ({
-                        targetUrl : to.fullPath
+                    path: '/login',
+                    query: ({
+                        targetUrl: to.fullPath
                     })
                 })
-            }else {
+            } else {
                 next();
             }
-         
-        }else {
-            console.log('to.fullPatheererrerer:',to.fullPath)
+
+        } else {
+            console.log('to.fullPatheererrerer:', to.fullPath)
             router.push({
-                path : '/login',
-                query : ({
-                    targetUrl : to.fullPath
+                path: '/login',
+                query: ({
+                    targetUrl: to.fullPath
                 })
                 // this.$router.push(to.fullPath)
             })
         }
-    }else{
+    } else {
         next();
     }
 })
