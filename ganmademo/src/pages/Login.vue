@@ -1,6 +1,12 @@
 <template>
     <div>
-         <div class="con">
+         <el-form class="con"
+            :model="ruleForm"
+            status-icon
+            :rules="rules"
+            ref="regForm"
+            label-width="100px"
+         >
              <p>
                  <i class="el-icon-arrow-left"></i>
              </p>
@@ -16,16 +22,16 @@
             </p>
             <div class="user">
                 <i class="el-icon-mobile-phone"></i>
-                <input type="text" placeholder="请输入用户名" class="username">
+                <input type="text" placeholder="请输入用户名" class="username" v-model="ruleForm.username">
             </div>
             <div class="paw">
                 <i class="el-icon-unlock"></i>
-                <input type="text" placeholder="请输入密码" class="password">
+                <input type="text" placeholder="请输入密码" class="password" v-model="ruleForm.password" >
             </div>
             <div class="mdl">
                 <el-form style="margin-top:20px;">      
                     <el-form-item>
-                        <el-checkbox label="记住密码" ></el-checkbox>
+                        <el-checkbox label="记住密码" v-model="ruleForm.mdl"></el-checkbox>
                     </el-form-item>
                  </el-form>
                     <p class="forget">忘记密码？</p>         
@@ -34,16 +40,69 @@
     
         
             <div class="dl">
-                <input type="button" value="登录" class="login">
+                <input type="button" value="登录" class="login" @click="submitForm">
             </div>
-         </div>
+         </el-form>
         
     </div>
 </template>
 
 <script>
 export default {
-    
+     data() {
+        return {
+            ruleForm : {
+                username : '',
+                password : '',
+                mdl : true
+            },
+            rules: {
+                username: [
+                    { required: true, message: '亲(づ￣3￣)づ╭❤～，用户名必须填写噢(～￣▽￣)～', trigger: 'blur' },
+                ],
+                password: [
+                    { required: true, message: '请输入密码', trigger: 'blur' },
+                ],
+            }
+        }      
+    },
+     methods : {
+        submitForm() {
+          //校验整个表单
+          this.$refs.regForm.validate(async (valid) => {
+             
+            if (valid) {
+
+              let {username,password,mdl} = this.ruleForm;
+
+              let {data} = await this.$axios.get('http://localhost:5200/user/login',{
+                  params : {
+                      username,
+                      password,
+                      mdl
+                  }
+              });
+           
+              if(data.code === 1) {
+                
+                let {targetUrl} = this.$route.query;
+                console.log('targetUrl:',targetUrl);
+                
+                this.$router.replace({
+                    path : targetUrl || '/mine'
+                });
+                
+                localStorage.setItem('Authorization',data.data);
+              }else{
+                alert('用户名或密码不正确！');
+              }
+            } else {
+              window.console.log('error submit!!');
+              return false;
+            }
+          });
+      },
+    }
 }
 </script>
 
@@ -127,11 +186,7 @@ export default {
         height: 1.330667rem;
         justify-content: space-between;
         align-items: center;
-        // el-checkbox__input{
-        //     margin-top: 2rem;
-        //     font-size: 0.9rem;
-        //     margin-left: -10.266667rem;
-        // }
+      
         .forget{
             font-size: 0.9rem;
             color: #fa6969;

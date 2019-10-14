@@ -1,6 +1,12 @@
 <template>
     <div>
-         <div class="con">
+         <el-form class="con" 
+            :model="ruleForm"
+            status-icon
+            :rules="rules"
+            ref="regForm"
+            label-width="100px"
+         >
              <p>
                  <i class="el-icon-arrow-left"></i>
              </p>
@@ -13,7 +19,7 @@
             </p>
             <div class="user">
                 <i class="el-icon-mobile-phone"></i>
-                <input type="text" placeholder="用户名" class="username">
+                <input type="text" placeholder="用户名" class="username" v-model="ruleForm.username">
             </div>
             <div class="yzm">
                 <i class="el-icon-circle-check"></i>
@@ -22,23 +28,95 @@
             </div>
             <div class="paw">
                 <i class="el-icon-unlock"></i>
-                <input type="text" placeholder="6~20位登录密码" class="password">
+                <input type="text" placeholder="6~20位登录密码" class="password" v-model="ruleForm.password">
             </div>
              <div class="paw">
                 <i class="el-icon-unlock"></i>
-                <input type="text" placeholder="再次确定密码" class="password">
+                <input type="text" placeholder="再次确定密码" class="password" v-model="ruleForm.checkPass">
             </div>
            
             <div class="zc">
-                <input type="button" value="注册" class="reg">
+                <input type="button" value="注册" class="reg" @click="submitForm">
             </div>
-         </div>
+         </el-form>
     </div>
 </template>
 
 <script>
 export default {
-    
+     data() {
+          const validatePass = (rule, value, callback) => {
+            if (value !== this.ruleForm.password) {
+            callback(new Error('两次输入密码不一致!'));
+            } else {
+            callback();
+            }
+        };
+
+        //校验用户名是否存在
+        const checkUsername = async (rule, value, callback) => {
+           let {data} = await this.$axios.get('http://localhost:5200/user/check',{
+             params:{
+               username : this.ruleForm.username
+             }
+           })
+          //  console.log('data:',data);
+           if(data.code === 0) {
+              callback(new Error('用户名已存在!'));
+           }else{
+             callback();
+           }
+        };
+        return {
+            
+            ruleForm:{
+                username : '',
+                password : '',
+                checkPass : ''
+            },
+             rules: {
+
+                username: [
+                    { required: true, message: '亲(づ￣3￣)づ╭❤～，用户名必须填写噢(～￣▽￣)～', trigger: 'blur' },
+                     { validator: checkUsername, trigger: 'blur' },
+                ],
+                password: [
+                    { required: true, message: '请输入密码', trigger: 'blur' },
+                     { min: 3, max: 12, message: '密码长度必须在 6 到 20 个字符', trigger: 'blur' }
+                ],
+                checkPass: [
+                    { required: true, message: '请确认密码', trigger: 'blur' },
+                    { validator: validatePass, trigger: 'blur' }
+                ]
+            }
+      };
+    },
+
+    methods : {
+        submitForm() {
+          //校验整个表单
+          this.$refs.regForm.validate(async (valid) => {
+
+            if (valid) {
+              let {username,password} = this.ruleForm;
+
+              let {data} = await this.$axios.post('http://localhost:5200/user/reg',{
+                username,
+                password
+              })
+              console.log('data:',data);
+              if(data.code === 1) {
+                this.$router.replace({name:'login'});
+              }else{
+                alert('注册失败');
+              }
+            } else {
+              window.console.log('error submit!!');
+              return false;
+            }
+          });
+      },
+    }
 }
 </script>
 
