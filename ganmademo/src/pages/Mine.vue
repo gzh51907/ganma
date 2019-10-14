@@ -5,10 +5,10 @@
                 <el-image style="width: 100%" src="https://api.wzq998.com/Forestproducts/public/static/api/img/self_back.png" class="h_bj"></el-image>
                
                     <i class="el-icon-setting" ></i>
-                <div>
-                    <el-image src="https://api.wzq998.com/Forestproducts/public/static/api/img/self_head.png" alt="" class="tx"></el-image>
+                <div class="dl_div" >
+                    <el-image src="https://api.wzq998.com/Forestproducts/public/static/api/img/self_head.png" alt="" class="tx" @click="goto('/login')"></el-image>
                
-                    <p class="login_reg">
+                    <p class="login_reg" @click="goto('/login')">
                   
                         <span>登录</span>
                         <span>/</span>
@@ -144,6 +144,11 @@ export default {
                }
            ]
         }
+    },
+    methods : {
+        goto(path) {
+            this.$router.push(path);
+        }
     }
 }
 </script>
@@ -183,7 +188,7 @@ body,html{
         right:15px;
         font-weight: 400;
     }
-     
+
      
      .tx{
         //  width: 2.666667rem;
