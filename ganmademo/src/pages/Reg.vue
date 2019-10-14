@@ -17,20 +17,20 @@
             <p class="ms">
                 <span class="ms_span1">新用户注册，立即获得2积分</span>
             </p>
-            <div class="user"  style="     overflow: hidden;">
+            <div class="user">
                 <i class="el-icon-mobile-phone"></i>
                 <input type="text" placeholder="用户名" class="username" v-model="ruleForm.username">
             </div>
-            <div class="yzm"  style="     overflow: hidden;">
+            <div class="yzm">
                 <i class="el-icon-circle-check"></i>
                 <input type="text" placeholder="验证码" class="verify">
                 <p class="get_verify">获取验证码</p>
             </div>
-            <div class="paw"  style="     overflow: hidden;">
+            <div class="paw">
                 <i class="el-icon-unlock"></i>
                 <input type="text" placeholder="6~20位登录密码" class="password" v-model="ruleForm.password">
             </div>
-             <div class="paw"  style="     overflow: hidden;">
+             <div class="paw">
                 <i class="el-icon-unlock"></i>
                 <input type="text" placeholder="再次确定密码" class="password" v-model="ruleForm.checkPass">
             </div>

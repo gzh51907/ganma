@@ -92,7 +92,7 @@ export default {
       this.idx=[datas1.data.data.banner];//banner图
      datas1.data.data.list.forEach(item => {
           this.imgurl=item.child;
-        // console.log(this.imgurl)
+        console.log(this.imgurl)
       });
      
     },
