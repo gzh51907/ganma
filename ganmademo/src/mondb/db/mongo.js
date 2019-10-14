@@ -72,6 +72,7 @@ async function update(colName, query, data) {
 async function find(colName, query = {}) {
     let { db, client } = await connect();
     let col = db.collection(colName);
+    console.log(query);
 
     // 查询数据库
     let result = await col.find(query).toArray();
@@ -81,7 +82,6 @@ async function find(colName, query = {}) {
     //返回结果
     return result;
 }
-
 
 
 module.exports = {
