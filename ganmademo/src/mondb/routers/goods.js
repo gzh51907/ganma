@@ -112,4 +112,21 @@ Router.get('/selsss', async (req, res) => {
     res.send(result)
 
 });
+
+
+
+
+// 查询单个
+Router.get('/ll', async (req, res) => {
+
+    let id = req.query.id
+    console.log(req)
+
+    let result = await mongo.lp(colName, { 'id': Number(id) })
+    // console.log(result)
+    // let result = await mongo.find(colName)
+
+    res.send(result)
+
+});
 module.exports = Router;

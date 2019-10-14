@@ -6,12 +6,13 @@
         <i
           class="el-icon-arrow-left"
           style="position: relative;display: block;float: left;font-size: 0.85333333rem;top: 0.10666667rem;"
+          @click="goto('/classify')"
         ></i>
         商品详情
         <i
           class="el-icon-shopping-cart-full"
           style="font-style: normal; -webkit-font-smoothing: antialiased;display: block;position: absolute;top: 0.8rem;font-size: 1.06666667rem;color: #0fca9d;right: 3.2rem;"
-        ></i>
+         :value="cartlength">{{cartlength}}</i>
         <p
           class="el-icon-chat-dot-round"
           style="position: absolute;top: 0.74666667rem;right: 1.06666667rem;margin: 0;padding: 0;"
@@ -19,7 +20,7 @@
       </div>
 
       <!-- 商品评价详情 -->
-      <div class="showname">
+      <div class="showname" v-for="item in datalist" :key="item.id">
         <div class="showtop">
           <div class="showcont" style="overflow:hidden; display: flex; justify-content: center">
             <p class="showcontp1" style="margin-left:10%">
@@ -35,11 +36,7 @@
         </div>
         <div style=" width: 100%;height: 100%;top: 0;left: 0;overflow: hidden;">
           <div class="showimg">
-            <img
-              src="https://respic.wzq998.com//uploads/goods/20191008/3dfcc4d622c6932e191884c9d6d5230e.jpg"
-              alt
-              style="float: left;width: 375px;"
-            />
+            <img :src="item.thumb" alt style="float: left;width: 375px;" />
             <!-- <img src="https://respic.wzq998.com//uploads/goods/20191008/3dfcc4d622c6932e191884c9d6d5230e.jpg" alt="" style="float: left;    width: 375px;">
             <img src="https://respic.wzq998.com//uploads/goods/20191008/3dfcc4d622c6932e191884c9d6d5230e.jpg" alt="" style="float: left;    width: 375px;">-->
           </div>
@@ -52,10 +49,12 @@
           >
             <p style="position: relative;color: white;margin-top: 0.53333333rem;">
               <span style="    display: inline-block;font-size: 14px;color: white;">￥</span>
-              <b style="    display: inline-block;font-size: 18px; color: white;">69.90</b>
+              <b
+                style="    display: inline-block;font-size: 18px; color: white;"
+              >{{item.sell_price}}</b>
               <del
                 style="display: inline-block;font-size: 14px;padding-left: 4px;color: white;text-decoration: line-through;"
-              >原价:￥89.00</del>
+              >原价:￥{{item.markets_price}}</del>
             </p>
           </div>
           <div
@@ -85,7 +84,7 @@
         >
           <p
             style="    padding: 0 0.5rem;font-size: 0.85333333rem;width: calc(100% - 56px);"
-          >王子清 蜂巢蜜500g*2</p>
+          >{{item.name}}</p>
         </div>
 
         <div
@@ -124,7 +123,7 @@
         >
           <span
             style="    width: 85%;    display: inline-block;position: relative;float: left;"
-          >已选：王子清 蜂巢蜜500g*2</span>
+          >已选：{{item.name}}</span>
           <span
             class="el-icon-arrow-right"
             style="  font-size: 0.74666667rem;top: 0;padding-right: 0.53333333rem;margin-top: 0.10666667rem;float:right"
@@ -200,28 +199,46 @@
           />
         </div>
 
-        <div style="position: absolute; width: 100%; bottom: 0; left: 0;background: white; border-top: 1px solid #cdcdcd; -webkit-transition: bottom 0.3s linear; transition: bottom 0.3s linear;"  >
+        <div
+          style="position: absolute; width: 100%; bottom: 0; left: 0;background: white; border-top: 1px solid #cdcdcd; -webkit-transition: bottom 0.3s linear; transition: bottom 0.3s linear;"
+        >
           <div style="width: 45%;display: block;position: relative;float: left;">
-            <div style="position: relative; float: left; text-align: center; height: 1.84rem; margin-top: 0.16rem; line-height: 1.84rem; margin-right: 0.53333333rem;"  >
-              <b style="    font-size: 0.96rem;display: inline;position: relative;text-align: center;padding: 2px;color: #6e6e6e;" class="el-icon-moon" ></b>
-              <span style="    display: inline;color: black;position: relative;text-align: center;font-size: 14px;padding: 2px;" >收藏</span>
-
+            <div
+              style="position: relative; float: left; text-align: center; height: 1.84rem; margin-top: 0.16rem; line-height: 1.84rem; margin-right: 0.53333333rem;"
+            >
+              <b
+                style="    font-size: 0.96rem;display: inline;position: relative;text-align: center;padding: 2px;color: #6e6e6e;"
+                class="el-icon-moon"
+              ></b>
+              <span
+                style="    display: inline;color: black;position: relative;text-align: center;font-size: 14px;padding: 2px;"
+              >收藏</span>
             </div>
-          <span style="position: relative;float: left;text-align: center;height: 1.84rem;margin-top: 0.16rem;line-height: 1.84rem;margin-right: 0.53333333rem;">
-            <b class="el-icon-phone" style="    font-size: 0.96rem;display: inline;position: relative;text-align: center;padding: 2px;color: #6e6e6e;"></b>
-            <span style="    display: inline;color: black;position: relative;text-align: center;font-size: 14px;padding: 2px;">客服</span>
-          </span>
+            <span
+              style="position: relative;float: left;text-align: center;height: 1.84rem;margin-top: 0.16rem;line-height: 1.84rem;margin-right: 0.53333333rem;"
+            >
+              <b
+                class="el-icon-phone"
+                style="    font-size: 0.96rem;display: inline;position: relative;text-align: center;padding: 2px;color: #6e6e6e;"
+              ></b>
+              <span
+                style="    display: inline;color: black;position: relative;text-align: center;font-size: 14px;padding: 2px;"
+              >客服</span>
+            </span>
           </div>
 
-
-          <div style="margin: 0.26666667rem 0;width: 54.8%;text-align: center;border-radius: 25px;-webkit-border-radius: 25px;-moz-border-radius: 25px;overflow: hidden;float:right">
-            <p style=" float:left;   background: linear-gradient(#5bebc8, #21d2a8);    width: 50%;border-top-left-radius: 25px;border-bottom-left-radius: 25px;display: block;height: 1.84rem;line-height: 1.84rem;font-weight: 500;color: white;">加入购物车</p>
-          <p style="      width: 50%;float:right;  border-top-right-radius: 25px;border-bottom-right-radius: 25px;background: #fa6969;height: 1.84rem;line-height: 1.84rem;font-weight: 500;color: white;">
-            原价购买
-          </p>
+          <div
+            style="margin: 0.26666667rem 0;width: 54.8%;text-align: center;border-radius: 25px;-webkit-border-radius: 25px;-moz-border-radius: 25px;overflow: hidden;float:right"
+          >
+            <p
+              style=" float:left;   background: linear-gradient(#5bebc8, #21d2a8);    width: 50%;border-top-left-radius: 25px;border-bottom-left-radius: 25px;display: block;height: 1.84rem;line-height: 1.84rem;font-weight: 500;color: white;"
+              @click="pusharr"
+            >加入购物车</p>
+            <p
+              style="      width: 50%;float:right;  border-top-right-radius: 25px;border-bottom-right-radius: 25px;background: #fa6969;height: 1.84rem;line-height: 1.84rem;font-weight: 500;color: white;"
+            >原价购买</p>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -229,7 +246,66 @@
 
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      datalist: ""
+    };
+  },
+  computed:{
+ cartlength(){
+
+      return this.$store.getters.cartlength
+    },
+  },
+  async created() {
+    let id = this.$router.history.current.params.id;
+
+    let data = await this.$axios.get("http://localhost:5200/goods/ll", {
+      params: {
+        id: id
+      }
+    });
+    let data1 = data.data;
+    this.datalist = data1;
+  },
+  methods: {
+    pusharr() {
+      let id = this.$router.history.current.params.id;
+      let curr = this.$store.state.cart.cartlist.filter(
+        item => item.id === id
+      )[0];
+      if (curr) {
+        alert("已经再购物车");
+      } else {
+        this.datalist.forEach(item => {
+          let goods = {
+            id,
+            price: item.sell_price,
+            name: item.name,
+            img: item.thumb
+          };
+
+          console.log(this.$store);
+          this.$store.commit("add2cart", goods);
+        });
+      }
+
+      // 添加一个商品
+      // let goods = {
+      //   id,
+      //   name: this.goodsInfo.goods_name,
+      //   imgurl: this.goodsInfo.goods_image,
+      //   price: this.goodsInfo.goods_promotion_price,
+      //   qty: 1
+      // };
+      // this.$store.commit("add2cart", goods);
+    },
+    goto(path){
+      this.$router.push(path)
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
