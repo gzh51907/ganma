@@ -20,11 +20,11 @@
                 <span class="ms_span1">欢迎登录赶马商城。若无账号</span>
                 <span class="ms_span2" @click="go2Reg('/reg')">立即注册</span>
             </p>
-            <div class="user">
+            <div class="user" style="     overflow: hidden;">
                 <i class="el-icon-mobile-phone"></i>
                 <input type="text" placeholder="请输入用户名" class="username" v-model="ruleForm.username">
             </div>
-            <div class="paw">
+            <div class="paw" style="     overflow: hidden;">
                 <i class="el-icon-unlock"></i>
                 <input type="text" placeholder="请输入密码" class="password" v-model="ruleForm.password" >
             </div>
@@ -68,6 +68,7 @@ export default {
     },
      methods : {
         submitForm() {
+       
           //校验整个表单
           this.$refs.regForm.validate(async (valid) => {
              
@@ -78,12 +79,15 @@ export default {
                 //将用户名存入本地
                 localStorage.setItem('user',username);
 
+          
+
                 let {data} = await this.$axios.get('http://localhost:5200/user/login',{
                     params : {
                         username,
                         password,
                         mdl
                     }
+
                 });
                 console.log('data:',data)
                 if(data.code === 1) {
@@ -146,10 +150,11 @@ export default {
         position: relative;
         .username{
             width: 100%;
+       
             height: 1.94rem;
             font-size: 0.84666667rem;
             line-height: 1.94rem;
-            padding: 0 0.8rem 0 1.38rem;
+            padding: 0 0rem 0 1.38rem;
             border:none;
             outline: none;
             border-bottom: 1px solid #cdcdcd;
@@ -173,7 +178,7 @@ export default {
             height: 1.94rem;
             font-size: 0.84666667rem;
             line-height: 1.94rem;
-            padding: 0 0.8rem 0 1.38rem;
+            padding: 0 0rem 0 1.38rem;
             border:none;
             outline: none;
             border-bottom: 1px solid #cdcdcd;
