@@ -84,7 +84,78 @@ async function find(colName, query = {}) {
 }
 
 
+
+
+//pai
+
+
+
+//倒叙
+async function pai(colName, query = {}) {
+    let { db, client } = await connect();
+    let col = db.collection(colName);
+    console.log(query);
+
+    // 查询数据库
+    let result = await col.find(query).sort({ markets_price: -1 }).toArray();
+
+    // 关闭数据库连接
+    client.close();
+    //返回结果
+    return result;
+}
+
+
+//升序
+async function pais(colName, query = {}) {
+    let { db, client } = await connect();
+    let col = db.collection(colName);
+    console.log(query);
+
+    // 查询数据库
+    let result = await col.find(query).sort({ markets_price: 1 }).toArray();
+
+    // 关闭数据库连接
+    client.close();
+    //返回结果
+    return result;
+}
+
+//最新
+async function paiss(colName, query = {}) {
+    let { db, client } = await connect();
+    let col = db.collection(colName);
+    console.log(query);
+
+    // 查询数据库
+    let result = await col.find(query).sort({ sell_price: 1 }).toArray();
+
+    // 关闭数据库连接
+    client.close();
+    //返回结果
+    return result;
+}
+//销量
+async function paisss(colName, query = {}) {
+    let { db, client } = await connect();
+    let col = db.collection(colName);
+    console.log(query);
+
+    // 查询数据库
+    let result = await col.find(query).sort({ number: 1 }).toArray();
+
+    // 关闭数据库连接
+    client.close();
+    //返回结果
+    return result;
+}
+
+
 module.exports = {
+    paisss,
+    paiss,
+    pais,
+    pai,
     find,
     create,
     remove,
