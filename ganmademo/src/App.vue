@@ -45,7 +45,7 @@ export default {
           dis: false
         },
         {
-   
+          path:'housing',
           id: "3",
           img:
             "https://api.wzq998.com/Forestproducts/public/static/api/img/bt_nav51.png",
