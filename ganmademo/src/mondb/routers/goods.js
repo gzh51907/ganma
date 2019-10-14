@@ -56,4 +56,60 @@ const colName = 'goodsinf'
 
 
 
+
+    //降序
+Router.get('/sel', async (req, res) => {
+
+    let id = req.query.brand_id
+    console.log(req)
+
+    let result = await mongo.pai(colName, { 'brand_id': Number(id) })
+    // console.log(result)
+    // let result = await mongo.find(colName)
+
+    res.send(result)
+
+})
+//升序
+Router.get('/sels', async (req, res) => {
+
+    let id = req.query.brand_id
+    console.log(req)
+
+    let result = await mongo.pais(colName, { 'brand_id': Number(id) })
+    // console.log(result)
+    // let result = await mongo.find(colName)
+
+    res.send(result)
+
+})
+//最新
+
+Router.get('/selss', async (req, res) => {
+
+    let id = req.query.brand_id
+    console.log(req)
+
+    let result = await mongo.paiss(colName, { 'brand_id': Number(id) })
+    // console.log(result)
+    // let result = await mongo.find(colName)
+
+    res.send(result)
+
+});
+
+
+//销量
+Router.get('/selsss', async (req, res) => {
+
+    let id = req.query.brand_id
+    console.log(req)
+
+    let result = await mongo.paisss(colName, { 'brand_id': Number(id) })
+    // console.log(result)
+    // let result = await mongo.find(colName)
+
+    res.send(result)
+
+});
 module.exports = Router;

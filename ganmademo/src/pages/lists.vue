@@ -38,29 +38,30 @@
         </div>
         <div class="brand-list">
           <div id="rank_list" class="row">
-            <p class="row-left in_" style="margin-right: 60px;">综合</p>
-            <p class="row-left" style="margin-right: 60px;">销量</p>
-            <p class="row-left" style="margin-right: 60px;">最新</p>
+            <p class="row-left in_" style="margin-right: 60px;" @click="zong" ref="a">综合</p>
+            <p class="row-left" style="margin-right: 60px;" @click="xiao" ref="b">销量</p>
+            <p class="row-left" style="margin-right: 60px;" @click="zuixin" ref="c">最新</p>
             <p class="row-right">
-              <i class="i">价格</i>
+              <i class="i" @click="stoew" ref="d">价格</i>
               <i class="el-icon-upload2"></i>
             </p>
           </div>
-          <div scroll-y="true" class="gds_list" >
-            <div class="product row" style="width:100%;position:relative" v-for="item in menus" :key="item.id">
+          <div scroll-y="true" class="gds_list">
+            <div
+              class="product row"
+              style="width:100%;position:relative"
+              v-for="item in menus"
+              :key="item.id"
+            >
               <div class="good-item row">
                 <div class="row-left">
-                  <img
-                    mode="widthFix"
-                    :src="item.thumb"
-                    class="img"
-                  />
+                  <img mode="widthFix" :src="item.thumb" class="img" />
                 </div>
                 <div class="row-right">
                   <p class="p1">{{item.name}}</p>
                   <div class="p2 row">
                     <i class="i" style="color:red">￥</i>
-                    <b class="b" style="color:red">{{item.sell_price}}</b>
+                    <b class="b" style="color:red">{{item.markets_price}}</b>
                     <b
                       class="right"
                       style="position: relative; float: right; font-size: 0.64rem; padding: 0.21rem 0.42rem; color: white; background: rgb(15, 202, 157); border-radius: 15px;"
@@ -78,30 +79,108 @@
 
 <script>
 export default {
-   data(){
-      return{
-        menus:'',
-      }
+  data() {
+    return {
+      menus: "",
+      num: true
+    };
   },
-  async created(){
-    let {id} = this.$route.params
-    console.log(id)
-    let data = await this.$axios.get('http://localhost:5200/goods/select',{
-      params:{
-        brand_id:id
+  async created() {
+    let { id } = this.$route.params;
+    console.log(id);
+    let data = await this.$axios.get("http://localhost:5200/goods/select", {
+      params: {
+        brand_id: id
       }
-    }
-    )
-      
-       this.menus=data.data;
-        console.log(this.menus)
+    });
+
+    this.menus = data.data;
+    console.log(this.menus);
   },
-  methods:{
-    goto(path){
-      this.$router.push(path)
+  methods: {
+    goto(path) {
+      this.$router.push(path);
+    },
+
+    async stoew() {
+      if (this.num == true) {
+        let { id } = this.$route.params;
+        console.log(id);
+        let data = await this.$axios.get("http://localhost:5200/goods/sel", {
+          params: {
+            brand_id: id
+          }
+        });
+
+        this.menus = data.data;
+        this.num = false;
+        console.log(this.menus);
+      } else {
+        let { id } = this.$route.params;
+        console.log(id);
+        let data = await this.$axios.get("http://localhost:5200/goods/sels", {
+          params: {
+            brand_id: id
+          }
+        });
+        this.menus = data.data;
+        this.num = true;
+        
+        console.log(this.menus);
+      }
+       this.$refs.a.classList.remove("in_");
+      this.$refs.b.classList.remove("in_");
+      this.$refs.c.classList.remove("in_");
+      this.$refs.d.classList.add("in_");
+    },
+    async zuixin() {
+      let { id } = this.$route.params;
+      console.log(id);
+      let data = await this.$axios.get("http://localhost:5200/goods/selss", {
+        params: {
+          brand_id: id
+        }
+      });
+
+      this.menus = data.data;
+      this.$refs.a.classList.remove("in_");
+      this.$refs.b.classList.remove("in_");
+      this.$refs.d.classList.remove("in_");
+      this.$refs.c.classList.add("in_");
+      console.log(this.menus);
+    },
+    async xiao() {
+      let { id } = this.$route.params;
+      console.log(id);
+      let data = await this.$axios.get("http://localhost:5200/goods/selsss", {
+        params: {
+          brand_id: id
+        }
+      });
+
+      this.menus = data.data;
+      this.$refs.a.classList.remove("in_");
+      this.$refs.c.classList.remove("in_");
+      this.$refs.d.classList.remove("in_");
+      this.$refs.b.classList.add("in_");
+    },
+    async zong() {
+      let { id } = this.$route.params;
+      console.log(id);
+      let data = await this.$axios.get("http://localhost:5200/goods/select", {
+        params: {
+          brand_id: id
+        }
+      });
+
+      this.menus = data.data;
+      console.log(this.menus);
+             this.$refs.d.classList.remove("in_");
+      this.$refs.b.classList.remove("in_");
+      this.$refs.c.classList.remove("in_");
+      this.$refs.a.classList.add("in_");
     }
   }
- 
 };
 </script>
 <style lang="scss" scoped>
