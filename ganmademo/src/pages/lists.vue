@@ -10,7 +10,7 @@
       </div>
       <div class="award">
         <div class="ph-nav">
-          <i class="el-icon-arrow-left"></i>
+          <i class="el-icon-arrow-left" @click="goto('/classify')"></i>
           <em class="share-mark">
             <i class="el-icon-paperclip"></i>分享
           </em>
@@ -47,20 +47,20 @@
             </p>
           </div>
           <div scroll-y="true" class="gds_list" >
-            <div class="product row" style="width:100%;position:relative">
+            <div class="product row" style="width:100%;position:relative" v-for="item in menus" :key="item.id">
               <div class="good-item row">
                 <div class="row-left">
                   <img
                     mode="widthFix"
-                    src="https://respic.wzq998.com//uploads/goods/20190808/7bedd7a88484e95f0ad2a209b66cf257.jpg"
+                    :src="item.thumb"
                     class="img"
                   />
                 </div>
                 <div class="row-right">
-                  <p class="p1">王子清 蜂巢蜜 500克/盒</p>
+                  <p class="p1">{{item.name}}</p>
                   <div class="p2 row">
                     <i class="i" style="color:red">￥</i>
-                    <b class="b" style="color:red">38.00</b>
+                    <b class="b" style="color:red">{{item.sell_price}}</b>
                     <b
                       class="right"
                       style="position: relative; float: right; font-size: 0.64rem; padding: 0.21rem 0.42rem; color: white; background: rgb(15, 202, 157); border-radius: 15px;"
@@ -78,10 +78,30 @@
 
 <script>
 export default {
-  created(){
+   data(){
+      return{
+        menus:'',
+      }
+  },
+  async created(){
     let {id} = this.$route.params
     console.log(id)
+    let data = await this.$axios.get('http://localhost:5200/goods/select',{
+      params:{
+        brand_id:id
+      }
+    }
+    )
+      
+       this.menus=data.data;
+        console.log(this.menus)
+  },
+  methods:{
+    goto(path){
+      this.$router.push(path)
+    }
   }
+ 
 };
 </script>
 <style lang="scss" scoped>
@@ -244,6 +264,7 @@ export default {
         position: relative;
         overflow-y: scroll;
         background: white;
+        height: 365px;
         .product {
           .good-item {
             padding: 0.37rem 0.53rem;
@@ -268,7 +289,7 @@ export default {
               .p1 {
                 position: relative;
                 font-size: 0.84666667rem;
-                max-height: 2.02666667rem;
+                // max-height: 2.02666667rem;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 display: -webkit-box;
