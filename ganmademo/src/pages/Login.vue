@@ -8,7 +8,7 @@
             label-width="100px"
          >
              <p>
-                 <i class="el-icon-arrow-left"></i>
+                 <i class="el-icon-arrow-left" @click="goto('/mine')"></i>
              </p>
              <div class="logo">
                  <el-image src="https://api.wzq998.com/Forestproducts/public/static/api/img/login_logo.png" class="logo_img"></el-image>
@@ -18,7 +18,7 @@
             </p>
             <p class="ms">
                 <span class="ms_span1">欢迎登录赶马商城。若无账号</span>
-                <span class="ms_span2">立即注册</span>
+                <span class="ms_span2" @click="go2Reg('/reg')">立即注册</span>
             </p>
             <div class="user">
                 <i class="el-icon-mobile-phone"></i>
@@ -75,6 +75,9 @@ export default {
 
               let {username,password,mdl} = this.ruleForm;
 
+            //将用户名存入本地
+            // localStorage.setItem('user',JSON.stringify({username}));
+
               let {data} = await this.$axios.get('http://localhost:5200/user/login',{
                   params : {
                       username,
@@ -102,6 +105,12 @@ export default {
             }
           });
       },
+      goto(path) {
+          this.$router.push(path);
+      },
+      go2Reg(path) {
+          this.$router.push(path);
+      }
     }
 }
 </script>
