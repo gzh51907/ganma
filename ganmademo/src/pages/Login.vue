@@ -8,7 +8,7 @@
             label-width="100px"
          >
              <p>
-                 <i class="el-icon-arrow-left"></i>
+                 <i class="el-icon-arrow-left" @click="goto('/mine')"></i>
              </p>
              <div class="logo">
                  <el-image src="https://api.wzq998.com/Forestproducts/public/static/api/img/login_logo.png" class="logo_img"></el-image>
@@ -18,7 +18,7 @@
             </p>
             <p class="ms">
                 <span class="ms_span1">欢迎登录赶马商城。若无账号</span>
-                <span class="ms_span2">立即注册</span>
+                <span class="ms_span2" @click="go2Reg('/reg')">立即注册</span>
             </p>
             <div class="user">
                 <i class="el-icon-mobile-phone"></i>
@@ -73,35 +73,44 @@ export default {
              
             if (valid) {
 
-              let {username,password,mdl} = this.ruleForm;
+                let {username,password,mdl} = this.ruleForm;
+                console.log(username)
+                //将用户名存入本地
+                localStorage.setItem('user',username);
 
-              let {data} = await this.$axios.get('http://localhost:5200/user/login',{
-                  params : {
-                      username,
-                      password,
-                      mdl
-                  }
-              });
-           
-              if(data.code === 1) {
-                
-                let {targetUrl} = this.$route.query;
-                console.log('targetUrl:',targetUrl);
-                
-                this.$router.replace({
-                    path : targetUrl || '/mine'
+                let {data} = await this.$axios.get('http://localhost:5200/user/login',{
+                    params : {
+                        username,
+                        password,
+                        mdl
+                    }
                 });
-                
-                localStorage.setItem('Authorization',data.data);
-              }else{
-                alert('用户名或密码不正确！');
-              }
+                console.log('data:',data)
+                if(data.code === 1) {
+                    
+                    let {targetUrl} = this.$route.query;
+                    console.log('targetUrl:',targetUrl);
+                    
+                    this.$router.replace({
+                        path : targetUrl || '/mine'
+                    });
+                    
+                    localStorage.setItem('Authorization',data.data);
+                }else{
+                    alert('用户名或密码不正确！');
+                }
             } else {
-              window.console.log('error submit!!');
-              return false;
+            window.console.log('error submit!!');
+            return false;
             }
-          });
+        });
       },
+      goto(path) {
+          this.$router.push(path);
+      },
+      go2Reg(path) {
+          this.$router.push(path);
+      }
     }
 }
 </script>

@@ -8,7 +8,7 @@
             label-width="100px"
          >
              <p>
-                 <i class="el-icon-arrow-left"></i>
+                 <i class="el-icon-arrow-left" @click="go2Login('/login')"></i>
              </p>
             
             <p class="wz_zc">
@@ -116,6 +116,9 @@ export default {
             }
           });
       },
+      go2Login(path) {
+          this.$router.push(path);
+      }
     }
 }
 </script>
