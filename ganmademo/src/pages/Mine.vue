@@ -1,25 +1,18 @@
 <template>
     <div>
         <div class="con">
-            <div class="content">
+            <div class="header">
                 <el-image style="width: 100%" src="https://api.wzq998.com/Forestproducts/public/static/api/img/self_back.png" class="h_bj"></el-image>
-                <template  v-if="currentUser">
-                    <i class="el-icon-setting" @click="go2logout('/logout')"></i>
-                </template>
-           
-                     <i class="el-icon-setting" v-else @click="open3"></i>
-              
-                <div class="dl_div" >
-                    <el-image src="https://api.wzq998.com/Forestproducts/public/static/api/img/self_head.png" alt="" class="tx" @click="goto('/login')"></el-image>
                
-                    <p class="login_reg" @click="goto('/login')">
-                        <template v-if="!currentUser">
-                            <span>登录</span>
-                            <span>/</span>
-                            <span>注册</span>
-                        </template>
-                        <span v-else>{{currentUser}}</span>
-             
+                    <i class="el-icon-setting" ></i>
+                <div>
+                    <el-image src="https://api.wzq998.com/Forestproducts/public/static/api/img/self_head.png" alt="" class="tx"></el-image>
+               
+                    <p class="login_reg">
+                  
+                        <span>登录</span>
+                        <span>/</span>
+                        <span>注册</span>
                     </p>
                  </div>
             
@@ -73,17 +66,13 @@
                         <span class="footer_b_span3">滇ICP备13002773号-1</span>
                     </p>
                 </div> 
-               
             </div>
-             <!-- <div class="ts" v-if="!currentUser">未登录</div> -->
         </div>
     </div>
 </template>
 
 <script>
-import { Message } from 'element-ui';
 export default {
-    
     data(){
         return {
            datalist1 : [
@@ -155,33 +144,6 @@ export default {
                }
            ]
         }
-    },
-    methods : {
-        goto(path) {
-            this.$router.push(path);
-        },
-        go2logout(path) {
-            this.$router.push(path);
-        },
-    
-        open3() {
-            this.$message({
-            message: '请先登录',
-            type: 'warning'
-            });
-      }
-    },
-    computed : {
-        //获取用户名
-        currentUser() {
-            let user = localStorage.getItem("user");
-            // let aa = localStorage.getItem('Authorization');
-            // console.log('aa:',aa)
-            return user;
-            // console.log(user)
-            // console.log(user.username)
-
-        }
     }
 }
 </script>
@@ -200,8 +162,7 @@ body,html{
      width: 100%;
       background: #ddd;
     //  background: #ddd6;
-    position: relative;
-     .content {
+     .header {
      position: relative;
      width: 100%;
     .h_img{
@@ -222,7 +183,7 @@ body,html{
         right:15px;
         font-weight: 400;
     }
-
+     
      
      .tx{
         //  width: 2.666667rem;
@@ -472,23 +433,7 @@ body,html{
              }
          }
      }
-     
  }
-//  .ts{
-//          position: absolute;
-//          top:50%;
-//          left:50%;
-//          transform: translate(-50%,-50%);
-//          background: #000;
-//          opacity: 0.6;
-//          width: 60px;
-//          height: 40px;
-//          color: #fff;
-//          text-align: center;
-//          line-height: 40px;
-//          border-radius: 5px;
-//          font-size: 14px;
-//      }
  }
  
 </style>
