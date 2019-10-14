@@ -210,7 +210,7 @@
         style="width:50%;display: block;position: relative;float: left;" 
         v-for="item in datalist" :key="item.id">
           <p style="position: relative;width: 98%;left: 0;height: 9.6rem;overflow: hidden;margin:0;padding:0">
-            <img style="-webkit-border-radius: 5px;display: block;position: relative;width: 100%;height:100%" :src="item.thumb" alt="">
+            <img style="-webkit-border-radius: 5px;display: block;position: relative;width: 100%;height:100%" v-lazy="item.thumb" alt="">
           </p>
           <p style="margin:0;padding:0;position: relative;font-size: 0.74666667rem;color: #5d5d5d;width: 93.88%;padding: 0.26666667rem 0;margin: 0 auto;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
             {{item.name}}
