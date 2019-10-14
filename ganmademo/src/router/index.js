@@ -18,6 +18,9 @@ import Reg from '../pages/Reg.vue';
 import Details from '../pages/Details.vue'
 import Cart from '../pages/Cart.vue'
 import Housing from '../pages/Housing.vue'
+// 退出
+import Logout from '../pages/Logout.vue'
+
 //这里面可以添加要跳转的路径
 let router = new VueRouter({
     routes: [{
@@ -72,7 +75,15 @@ let router = new VueRouter({
         {
             name: 'reg',
             path: '/reg',
-            component: Reg}
+            component: Reg
+        },
+
+        //退出
+        {
+            name: 'logout',
+            path: '/logout',
+            component: Logout
+        }
     ]
 })
 //这里用来判断是否登录允许进入购物车或者其他

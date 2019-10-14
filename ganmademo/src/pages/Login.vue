@@ -74,37 +74,40 @@ export default {
              
             if (valid) {
 
-              let {username,password,mdl} = this.ruleForm;
+                let {username,password,mdl} = this.ruleForm;
+                console.log(username)
+                //将用户名存入本地
+                localStorage.setItem('user',username);
 
-            //将用户名存入本地
-            // localStorage.setItem('user',JSON.stringify({username}));
+          
 
-              let {data} = await this.$axios.get('http://localhost:5200/user/login',{
-                  params : {
-                      username,
-                      password,
-                      mdl
-                  }
-              });
-           
-              if(data.code === 1) {
-                   console.log(data)
-                let {targetUrl} = this.$route.query;
-                console.log('targetUrl:',targetUrl);
-                
-                this.$router.replace({
-                    path : targetUrl || '/mine'
+                let {data} = await this.$axios.get('http://localhost:5200/user/login',{
+                    params : {
+                        username,
+                        password,
+                        mdl
+                    }
+
                 });
-                
-                localStorage.setItem('Authorization',data.data);
-              }else{
-                alert('用户名或密码不正确！');
-              }
+                console.log('data:',data)
+                if(data.code === 1) {
+                    
+                    let {targetUrl} = this.$route.query;
+                    console.log('targetUrl:',targetUrl);
+                    
+                    this.$router.replace({
+                        path : targetUrl || '/mine'
+                    });
+                    
+                    localStorage.setItem('Authorization',data.data);
+                }else{
+                    alert('用户名或密码不正确！');
+                }
             } else {
-              window.console.log('error submit!!');
-              return false;
+            window.console.log('error submit!!');
+            return false;
             }
-          });
+        });
       },
       goto(path) {
           this.$router.push(path);
