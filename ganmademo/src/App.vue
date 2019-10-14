@@ -44,6 +44,10 @@ export default {
         }
       });
     }
+  },
+  created() {
+    // 一刷新就判断用户是否存在
+    this.$store.dispatch("checkLogin");
   }
 };
 </script>
