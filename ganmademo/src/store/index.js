@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 import app from './app';
 import lists from './lists';
 import common from './common';
-
+import cart from './cart'
 
 
 Vue.use(Vuex)
