@@ -59,9 +59,6 @@ export default {
         height: 60px;
         margin-bottom: 5px;
         .grid-content{
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
         height: 60px;
         position: relative;
        
@@ -84,14 +81,10 @@ export default {
     .main{
         padding-bottom: 0px;
         .el-col{
-            // height: 150px;
-            // display: flex;
-            // flex-direction: column;
+           
           
             .grid-content{
-                // flex: 1;
                 height: 45px;
-                // margin-bottom: 5px;
                 position: relative;
                 .el-icon-arrow-right{
                     position: absolute;
