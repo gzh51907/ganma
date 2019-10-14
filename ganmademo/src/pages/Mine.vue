@@ -173,14 +173,18 @@ export default {
     },
     computed : {
         //获取用户名
-        currentUser() {
-            let user = localStorage.getItem("user");
-            // let aa = localStorage.getItem('Authorization');
-            // console.log('aa:',aa)
-            return user;
-            // console.log(user)
-            // console.log(user.username)
-
+        currentUser() {  
+            // let username = this.$store.state.common.user.username;
+            // console.log(username)
+            // console.log('aa:',this.$store.state.common)
+       
+            try{
+            // console.log('vv:',this.$store.state.common.user.username)
+            return this.$store.state.common.user.username;
+            }catch{
+                //    console.log('vv:',this.$store.state.common.user)
+            }
+            // return this.$store.state.common.user.username;
         }
     }
 }

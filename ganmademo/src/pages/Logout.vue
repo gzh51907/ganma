@@ -23,7 +23,7 @@
         </el-main>
         <el-footer style="height:350px;">
             <el-row>
-                <el-button type="danger" round  @click="go2home('/home')" class="logout">退出登录</el-button>
+                <el-button type="danger" round  @click="logout()" class="logout">退出登录</el-button>
             </el-row>
         </el-footer>
     </el-container>
@@ -47,8 +47,15 @@ export default {
         go2mine(path) {
             this.$router.push(path);
         },
-        go2home(path) {
-             this.$router.push(path);
+        // go2home(path) {
+        //      this.$router.push(path);
+        // },
+        logout() {
+            this.$store.commit('logout');
+            this.$router.push({
+                path : '/home'
+            })
+
         }
     }
 }

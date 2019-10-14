@@ -1,8 +1,9 @@
 import Vue from 'vue';
 
 import Vuex from 'vuex';
-import app from './app'
-import lists from './lists'
+import app from './app';
+import lists from './lists';
+import common from './common';
 
 
 Vue.use(Vuex)
@@ -11,8 +12,9 @@ const store = new Vuex.Store({
 
 //放模块，上面记得引入
     modules:{
-            app,
+        app,
         lists,
+        common
  
     }
 })

@@ -73,9 +73,9 @@ export default {
       this.$refs.regForm.validate(async valid => {
         if (valid) {
           let { username, password, mdl } = this.ruleForm;
-          console.log(username);
+          // console.log(username);
           //将用户名存入本地
-          localStorage.setItem("user", username);
+          // localStorage.setItem("user", username);
 
           let { data } = await this.$axios.get(
             "http://localhost:5200/user/login",
@@ -87,10 +87,16 @@ export default {
               }
             }
           );
-          console.log("data:", data);
+          // console.log("data:", data);
+
           if (data.code === 1) {
-            let { targetUrl } = this.$route.query;
-            console.log("targetUrl:", targetUrl);
+            let  {targetUrl}  = this.$route.query;
+          
+        // console.log(targetUrl,'456465465465',typeof(targetUrl))
+
+            this.$store.commit('login',{
+              username,Authorization:data.data
+            })
 
             this.$router.replace({
               path: targetUrl || "/mine"
@@ -101,7 +107,7 @@ export default {
             alert("用户名或密码不正确！");
           }
         } else {
-          window.console.log("error submit!!");
+          // window.console.log("error submit!!");
           return false;
         }
       });
@@ -206,16 +212,7 @@ export default {
   width: 89.33%;
   height: 2.22rem;
   margin: 1.66rem auto;
-  // border-radius: 25px;
-  // text-align: center;
-  // -webkit-border-radius: 25px;
-  // -moz-border-radius: 25px;
-  // -ms-border-radius: 25px;
-  // line-height: 2.22rem;
-  // font-size: 0.85333333rem;
-  // font-weight: 600;
-  // color: white;
-  // background: -webkit-gradient(linear, left top, right top, from(#65efce), to(#15cca0));
+
   .login {
     position: absolute;
     top: -1.67rem;

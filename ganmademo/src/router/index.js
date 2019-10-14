@@ -20,6 +20,7 @@ import Cart from '../pages/Cart.vue'
 import Housing from '../pages/Housing.vue'
 // 退出
 import Logout from '../pages/Logout.vue'
+import store from '../store';
 
 //这里面可以添加要跳转的路径
 let router = new VueRouter({
@@ -30,7 +31,10 @@ let router = new VueRouter({
     },{
         name: 'cart',
         path: '/cart',
-        component: Cart
+        component: Cart,
+        meta : {
+            requirsAuth : true
+        }
     },
         {
             name: 'details',
@@ -85,8 +89,42 @@ let router = new VueRouter({
             component: Logout
         }
     ]
-})
+});
 //这里用来判断是否登录允许进入购物车或者其他
 //设置全局路由守卫
+router.beforeEach(async function(to,from,next) {
+    
+    if(to.meta.requirsAuth) {
+        let user = localStorage.getItem('user');
+        // console.log('55444')
+        if(user) {
+            let res = await store.dispatch('checkLogin');
+            // console.log('res:',res);
+            if(res === 400) {
+                console.log('to.fullPath:',to.fullPath)
+                next({
+                    path : '/login',
+                    query : ({
+                        targetUrl : to.fullPath
+                    })
+                })
+            }else {
+                next();
+            }
+         
+        }else {
+            console.log('to.fullPatheererrerer:',to.fullPath)
+            router.push({
+                path : '/login',
+                query : ({
+                    targetUrl : to.fullPath
+                })
+                // this.$router.push(to.fullPath)
+            })
+        }
+    }else{
+        next();
+    }
+})
 
 export default router;
