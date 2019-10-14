@@ -82,7 +82,6 @@ export default {
         padding-bottom: 0px;
         .el-col{
            
-          
             .grid-content{
                 height: 45px;
                 position: relative;

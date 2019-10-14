@@ -75,7 +75,7 @@
                 </div> 
                
             </div>
-             <!-- <div class="ts" v-if="!currentUser">未登录</div> -->
+            
         </div>
     </div>
 </template>
