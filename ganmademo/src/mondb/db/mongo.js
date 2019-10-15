@@ -55,7 +55,9 @@ async function remove(colName, query) {
 
 
 //改
-async function update(colName, query, data) {
+async function update(colName, query,data) {
+    // return query
+    console.log(query,'ppppp',data,'llll')
     let { db, client } = await connect();
     // 获取集合
     let col = db.collection(colName);

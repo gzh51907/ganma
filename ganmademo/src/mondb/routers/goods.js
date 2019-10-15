@@ -38,26 +38,26 @@ const colName = 'goodsinf'
 //         // let id = req.params.brand_id
 //         // console.log(req.params.brand_id)
 //         // let result = await mongo.find(colName, id)
-        
+
 //         // res.send(result)
 //     })
-    Router.get('/select', async (req, res) => {
-        
-        let id = req.query.brand_id
-        console.log(req)
+Router.get('/select', async (req, res) => {
 
-        let result = await mongo.find(colName, {'brand_id':Number(id)})
-        // console.log(result)
-        // let result = await mongo.find(colName)
+    let id = req.query.brand_id
+    console.log(req)
 
-        res.send(result)
+    let result = await mongo.find(colName, { 'brand_id': Number(id) })
+    // console.log(result)
+    // let result = await mongo.find(colName)
 
-    })
+    res.send(result)
 
-
+})
 
 
-    //降序
+
+
+//降序
 Router.get('/sel', async (req, res) => {
 
     let id = req.query.brand_id
@@ -128,5 +128,59 @@ Router.get('/ll', async (req, res) => {
 
     res.send(result)
 
+});
+
+
+
+
+//插入
+Router.get('/charu', async (req, res) => {
+
+    let { username, id, num } = req.query;
+    console.log(username, id)
+
+    let result
+    try {
+        await mongo.create('shoping', [{ username, id, num }]);
+        result = formatData()
+    } catch (err) {
+        result = formatData({ code: 0 })
+    }
+
+    res.send(result);
+
+});
+
+
+//某一个用户的订单
+Router.get('/cartpeople', async (req, res) => {
+
+    let username = req.query.username;
+ 
+    let result = await mongo.find('shoping', { username });
+    console.log(result)
+    res.send(result)
+    // if (result.length) {
+    //     res.send(formatData({ code: 0 }))// {code:1,msg:'success',data}
+    // } else {
+    //     res.send(formatData());
+    // }
+});
+
+//改
+Router.post('/dingdan', async (req, res) => {
+   
+    let {username,id,num} = req.body;
+    console.log(id,num,'45646545646545')
+    // console.log('llll:',typeof(id))
+    // console.log('555:',typeof(num))
+    let result = await mongo.update('shoping',{'username':username,'id':String(id)},{$set:{'num':String(num)}});
+  
+    res.send(result)
+    if (result.length) {
+        res.send(formatData({ code: 0 }))// {code:1,msg:'success',data}
+    } else {
+        res.send(formatData());
+    }
 });
 module.exports = Router;
