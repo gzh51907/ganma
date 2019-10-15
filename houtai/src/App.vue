@@ -117,6 +117,7 @@ li {
       .main{
           overflow-x: hidden;
           overflow-y: scroll;
+          background: #ccc;
       }
     }
   }
