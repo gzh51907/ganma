@@ -12,7 +12,8 @@
         <i
           class="el-icon-shopping-cart-full"
           style="font-style: normal; -webkit-font-smoothing: antialiased;display: block;position: absolute;top: 0.8rem;font-size: 1.06666667rem;color: #0fca9d;right: 3.2rem;"
-         :value="cartlength">{{cartlength}}</i>
+          :value="cartlength"
+        >{{cartlength}}</i>
         <p
           class="el-icon-chat-dot-round"
           style="position: absolute;top: 0.74666667rem;right: 1.06666667rem;margin: 0;padding: 0;"
@@ -252,12 +253,12 @@ export default {
       datalist: ""
     };
   },
-  computed:{
- cartlength(){
-
-      return this.$store.getters.cartlength
-    },
+  computed: {
+    cartlength() {
+      return this.$store.getters.cartlength;
+    }
   },
+
   async created() {
     let id = this.$router.history.current.params.id;
 
@@ -269,40 +270,63 @@ export default {
     let data1 = data.data;
     this.datalist = data1;
   },
+
+
   methods: {
-    pusharr() {
+    async pusharr() {
       let id = this.$router.history.current.params.id;
       let curr = this.$store.state.cart.cartlist.filter(
         item => item.id === id
       )[0];
+
       if (curr) {
         alert("已经再购物车");
       } else {
-        this.datalist.forEach(item => {
-          let goods = {
-            id,
-            price: item.sell_price,
-            name: item.name,
-            img: item.thumb
-          };
-
-          console.log(this.$store);
-          this.$store.commit("add2cart", goods);
+        let username = this.$store.state.common.user.username;
+        let data = await this.$axios.get(
+          "http://localhost:5200/goods/cartpeople",
+          {
+            params: {
+              username: username
+            }
+          }
+        );
+        var oo;
+        data.data.forEach(item => {
+          oo = item.id;
         });
-      }
+        console.log(oo);
+        if (oo === id) {
+          alert("已经再购物车");
+        }
+         else {
+          console.log("djaskldjsalkjdlksajd");
+          this.datalist.forEach(item => {
+            let goods = {
+              id,
+              price: item.sell_price,
+              name: item.name,
+              img: item.thumb
+        
+            };
+            this.$store.commit("add2cart", goods);
+            let username = this.$store.state.common.user.username;
+            let data = this.$axios.get("http://localhost:5200/goods/charu", {
+              params: {
+                id: id,
+                num: 1,
+                username
+              }
+            });
 
-      // 添加一个商品
-      // let goods = {
-      //   id,
-      //   name: this.goodsInfo.goods_name,
-      //   imgurl: this.goodsInfo.goods_image,
-      //   price: this.goodsInfo.goods_promotion_price,
-      //   qty: 1
-      // };
-      // this.$store.commit("add2cart", goods);
+            // console.log(this.$store);
+          });
+        }
+      }
     },
-    goto(path){
-      this.$router.push(path)
+
+    goto(path) {
+      this.$router.push(path);
     }
   }
 };

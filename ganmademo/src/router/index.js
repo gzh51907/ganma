@@ -34,6 +34,7 @@ let router = new VueRouter({
         name: 'cart',
         path: '/cart',
         component: Cart,
+        
         meta: {
             requirsAuth: true
         },
@@ -109,7 +110,7 @@ let router = new VueRouter({
 //这里用来判断是否登录允许进入购物车或者其他
 //设置全局路由守卫
 router.beforeEach(async function (to, from, next) {
-
+  
     if (to.meta.requirsAuth) {
         let user = localStorage.getItem('user');
         // console.log('55444')
@@ -143,4 +144,8 @@ router.beforeEach(async function (to, from, next) {
     }
 })
 
+
+
+
+  
 export default router;

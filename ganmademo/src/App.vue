@@ -3,7 +3,7 @@
     <div>
       <router-view />
     </div>
-    <el-row :gutter="20" class="dibu" style="background:white;width:100%;margin:0">
+    <el-row :gutter="20" class="dibu" style="background:white;width:100%;margin:0;z-index:7000">
       <el-col style="width:20%" v-for="item in databottom" :key="item.img">
         <div class="grid-content bg-purple" @click="goto(item.path)">
           <p class="p1">
