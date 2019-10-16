@@ -46,7 +46,6 @@ async function remove(colName, query) {
     let { db, client } = await connect();
     // 获取集合
     let col = db.collection(colName);
-
     let result = await col.deleteMany(query);
     client.close();
     return result;
@@ -74,7 +73,7 @@ async function update(colName, query,data) {
 async function find(colName, query = {}) {
     let { db, client } = await connect();
     let col = db.collection(colName);
-    console.log(query);
+    // console.log(query);
 
     // 查询数据库
     let result = await col.find(query).toArray();

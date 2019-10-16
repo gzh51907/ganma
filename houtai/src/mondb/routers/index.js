@@ -19,12 +19,14 @@ Router.use((req, res, next) => {
 // 引入每个模块路由
 const goodsRouter = require('./goods');
 const userRouter = require('./user');
-const adminRouter =require('./admin') 
+const adminRouter =require('./admin');
+const shopingRouter = require('./shoping')
 Router.use(express.urlencoded({ extended: true }), express.json());//推导：内部自动调用next
 
 Router.use('/goods', goodsRouter);
 Router.use('/admin',adminRouter);
 Router.use('/user', userRouter);
+Router.use('/shoping',shopingRouter)
 Router.get('/verify', (req, res) => {
     let Authorization = req.get('Authorization');
 

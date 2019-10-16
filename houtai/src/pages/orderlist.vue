@@ -9,10 +9,9 @@
           </span>
           订单列表
         </div>
-        <table id="tb">
+        <table id="tb" >
           <thead id="thd">
             <tr>
-              <th>id</th>
               <th>用户名</th>
               <th>shopId</th>
               <th>商品数量</th>
@@ -20,40 +19,74 @@
             </tr>
           </thead>
           <tbody id="tbd">
-            <tr>
-              <td>1</td>
-              <td>张学友</td>
-              <td>230</td>
-              <td>3</td>
+            <tr v-for="item in orderList.slice((currentPage-1)*pagesize,currentPage*pagesize)" :key="item.id">
+              <td>{{item.username}}</td>
+              <td>{{item.id}}</td>
+              <td contenteditable="true">{{item.num}}</td>
               <td>
-                <a href="###" class="a1">编辑</a>
-                <a href="###" class="a2">删除</a>
+                <!-- <span class="a1" @click="change(item.num,item.id)">编辑并保存</span> -->
+                <span class="a2" @click="delet(item.id)">删除</span>
               </td>
             </tr>
           </tbody>
-        </table>
-        <div id="fenye" class="clear">
-          <div class="btnbox">
-            <span class="first">First</span>
-            <span class="prev">previous</span>
-            <span class="active">1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>5</span>
-            <span class="next">next</span>
-            <span class="last">last</span>
-          </div>
+          <div id="fenye" class="clear">
+          <el-pagination background 
+          layout="total,prev, pager, next,jumper" 
+          :total="orderList.length"
+          :current-page.sync="currentPage"
+          :page-size="pagesize"
+          @current-change="handleCurrentChange"
+           >
+          </el-pagination>
         </div>
+        </table>
+        
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { async } from 'q';
 export default {
   data() {
-    return {};
+    return {
+      orderList: "",
+      currentPage:1,
+      pagesize:5,
+    };
+  },
+  async created() {
+    let { data } = await this.$axios.get("http://localhost:5200/shoping/order");
+    this.orderList = data;
+  },
+  methods:{
+    //分页-每页条数
+    handleSizeChange(val){
+      this.pagesize = val;
+    },
+    //当前页
+    handleCurrentChange(val){
+      this.currentPage = val;
+    },
+    //删除当行
+     async delet(id){
+            let {data} = await this.$axios.post('http://localhost:5200/shoping/del',{
+                params:{
+                    id:id
+                }
+            })
+            this.$router.go(0)
+        },
+    //修改数量
+    // async change(num,id){
+    //     await this.$axios.get('http://localhost:5200/shoping/change',{
+    //       params:{
+    //         num:num,
+    //         id:id
+    //       }
+    //     })
+    // }
   }
 };
 </script>
@@ -130,7 +163,7 @@ body {
   line-height: 30px;
   padding: 9px 9px;
 }
-#tbd tr td a {
+#tbd tr td span {
   display: inline-block;
   text-align: center;
   text-decoration: none;
@@ -157,52 +190,5 @@ body {
 #fenye {
   width: 100%;
   margin-top: 10px;
-}
-.btnbox {
-  float: right;
-}
-.btnbox span {
-  display: inline-block;
-  height: 26px;
-  line-height: 26px;
-  text-align: center;
-  border: 1px solid #cccccc;
-  background: #f5f5f5;
-  font-size: 9px;
-  cursor: pointer;
-}
-.btnbox span:nth-child(1) {
-  width: 46px;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-.btnbox span:nth-child(2) {
-  width: 70px;
-}
-.btnbox span:nth-child(3) {
-  width: 30px;
-}
-.btnbox span:nth-child(4) {
-  width: 30px;
-}
-.btnbox span:nth-child(5) {
-  width: 30px;
-}
-.btnbox span:nth-child(6) {
-  width: 30px;
-}
-.btnbox span:nth-child(7) {
-  width: 30px;
-}
-.btnbox span:nth-child(8) {
-  width: 48px;
-}
-.btnbox span:nth-child(9) {
-  width: 46px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-.btnbox span.active {
-  background: #49afcd;
 }
 </style>

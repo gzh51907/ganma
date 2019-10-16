@@ -68,6 +68,19 @@ Router.get('/', async (req, res) => {
     res.send(result)
 })
 
+Router.get('/all', async (req, res) => {
+    let result = await mongo.find('user')
+    res.send(result)
+})
+
+//小删一下用户
+Router.post('/del',async(req,res)=>{
+    let username = req.body.params.username;
+    
+    let result = await mongo.remove('user',{'username':username})
+    // console.log(result)
+    res.send(result)
+})
 Router.route('/:id')
     // 删除
     .delete((req, res) => {
