@@ -16,15 +16,17 @@
                     <tr>
                        
                         <th>用户名</th>
+                        <th>注册时间</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody id="tbd">
-                    <tr>
+                    <tr v-for="item in userlist" :key="item.username">
                       
-                        <td>张学友</td>
+                        <td>{{item.username}}</td>
+                        <td>{{item.regtime}}</td>
                         <td>
-                            <a href="###" class="a2">删除</a>
+                            <span class="a2" @click="delet(item.username)">删除</span>
                         </td>
                     </tr>
                 </tbody>
@@ -51,10 +53,23 @@
   export default {
     data() {
       return {
-        
+        userlist:'',
       }
     },
-    
+   async created(){
+       let {data} = await this.$axios.get('http://localhost:5200/user/all')
+        this.userlist = data
+    },
+    methods:{
+       async delet(username){
+            let {data} = await this.$axios.post('http://localhost:5200/user/del',{
+                params:{
+                    username:username
+                }
+            })
+            this.$router.go(0)
+        }
+    }
   }
 </script>
 
@@ -129,7 +144,7 @@ body{
     line-height: 30px;
     padding: 9px 9px;
 }
-#tbd tr td a{
+#tbd tr td span{
     display: inline-block;
     text-align: center;
     text-decoration: none;
