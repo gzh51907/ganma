@@ -19,7 +19,14 @@
 
         <div class="cartbottom" v-for="(item,index) in cartlist" :key="index">
           <div style=" width: 14.66%; padding-top: 2rem;">
-            <input type="checkbox" name id class="cartbottomcheck" />
+            <input
+              type="checkbox"
+          
+              name
+              id
+              class="cartbottomcheck"
+              v-model="item.check"
+            />
           </div>
           <img
             :src="item.img"
@@ -33,13 +40,15 @@
               <div class="lastremove">
                 <div
                   style="    position: relative;float: left;width: 28%;font-size: 0.64rem;text-align: center;padding: 2px 0;"
-                @click="jian(item.id)">-</div>
+                  @click="jian(item.id)"
+                >-</div>
                 <div
                   style="position: relative;width: 40%;top: 0;font-weight: 500;font-size: 0.64rem;border-left: 1px solid #cdcdcd;border-right: 1px solid #cdcdcd;float: left;text-align: center;padding: 2px 0;"
                 >{{item.num}}</div>
                 <div
                   style="    position: relative;width:28%;font-size: 0.64rem;text-align: center;padding: 2px 0;float:left"
-               @click="jia(item.id)" >+</div>
+                  @click="jia(item.id)"
+                >+</div>
               </div>
             </div>
           </div>
@@ -48,18 +57,25 @@
 
       <div class="cartfooter">
         <div style="    float: left;">
-          <input type="checkbox" name id class="footcheck" />
+          <input type="checkbox" name id class="footcheck" v-model="quanxuan" @click="checkno" />
           <label
             for
             style="display: block;position: relative;float: left;font-size: 0.74666667rem;margin-left: 5px;margin-top: 0.5rem;color: #6e6e6e;"
           >全选</label>
         </div>
-        <p style="font-size: 0.85333333rem;
+        <p
+          style="font-size: 0.85333333rem;
     margin-left:38%;
-    padding-top: 0.5rem;float: left;">总价: <span style="display: inline;
+    padding-top: 0.5rem;float: left;"
+        >
+          总价:
+          <span
+            style="display: inline;
     font-size: 0.85333333rem;
-    color: #fa6969;">11</span> </p>
-        <p id="footerp1">结算</p>
+    color: #fa6969;"
+          >{{totalPrice.toFixed(2)}}</span>
+        </p>
+        <p id="footerp1" @click="goto('/Order')">结算</p>
       </div>
     </div>
   </div>
@@ -70,14 +86,20 @@
 
 <script>
 export default {
-  
-  async created() {
-   
-  //  if(this.$router)
-//  if(this.$router.history.current.name=='cart'){
+  totalprice: 0,
 
-//  }
-this.$store.state.cart.cartlist=[]
+  data() {
+    return {
+      u: [],
+      quanxuan: false
+    };
+  },
+  async created() {
+    //  if(this.$router)
+    //  if(this.$router.history.current.name=='cart'){
+
+    //  }
+    this.$store.state.cart.cartlist = [];
     let username = this.$store.state.common.user.username;
     let data = await this.$axios.get("http://localhost:5200/goods/cartpeople", {
       params: {
@@ -86,50 +108,77 @@ this.$store.state.cart.cartlist=[]
     });
     data.data.forEach(async item => {
       let sho = item.id;
-     
+
       let data1 = await this.$axios.get("http://localhost:5200/goods/ll", {
         params: {
           id: sho
         }
       });
 
-
-
-
       data1.data.forEach(item => {
-        let id = item.id
-           let goods = {
-            id,
-            price: item.sell_price,
-            name: item.name,
-            img: item.thumb,
-            num:1
-          };
-  
-          // console.log(this.$store);
-          this.$store.commit("add2cart", goods);
+        let id = item.id;
+        let goods = {
+          id,
+          price: item.sell_price,
+          name: item.name,
+          img: item.thumb,
+          num: 1,
+          check: false
+        };
+
+        // console.log(this.$store);
+        this.$store.commit("add2cart", goods);
       });
-       console.log('qq:',this.$store.state.cart.cartlist)
     });
-    
   },
   // beforeMount(){this.$router.go(0)},
   computed: {
     cartlist() {
-
       return this.$store.state.cart.cartlist;
+    },
+    totalPrice() {
+      this.$store.state.cart.cartlist.forEach(item => {
+        if (item.check == true) {
+          this.u.push(item.id + "");
+        }
+      });
+      // console.log('11:',this.u)
+      return this.$store.getters.totalPrice;
     }
   },
-  methods:{
-    jia(id){
-           this.$store.commit('jia',id)
+  methods: {
+    checkno() {
+        this.quanxuan=!this.quanxuan
+ 
+      this.$store.state.cart.cartlist.forEach(item => {
+        
+          item.check =this.quanxuan
+          
+      });
     },
-      jian(id){
-           this.$store.commit('jian',id)
-    }
-    }
-};
+    jia(id) {
+      this.$store.commit("jia", id);
+    },
+    jian(id) {
+      this.$store.commit("jian", id);
+    },
 
+    goto(path) {
+      let ap = this.u;
+      // this.$store .state.cart.cartlist.forEach(item=>{
+      //   if(item.check==true){
+      //   //   let u=[];
+      //   //   console.log(item.id)
+      //   // u.push(item.id)
+      //   //   console.log(u)
+      //     // this.$router.push({name:'order',params:{u}})
+      //   }
+      // })
+      // console.log(ap)
+      this.$router.push({ name: "order", params: { ap } });
+    }
+  }
+};
 </script>
 
 

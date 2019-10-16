@@ -104,7 +104,11 @@ export default {
 
             localStorage.setItem("Authorization", data.data);
           } else {
-            alert("用户名或密码不正确！");
+               this.$message({
+          type:'info',
+          message:'用户名或密码不正确！'
+        })
+          
           }
         } else {
           // window.console.log("error submit!!");

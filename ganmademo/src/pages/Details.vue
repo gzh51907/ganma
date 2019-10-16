@@ -274,13 +274,19 @@ export default {
 
   methods: {
     async pusharr() {
+      // let num1 = localStorage.getItem('user');
+      // console.log(num1)
+      try{
       let id = this.$router.history.current.params.id;
       let curr = this.$store.state.cart.cartlist.filter(
         item => item.id === id
       )[0];
 
       if (curr) {
-        alert("已经再购物车");
+         this.$message({
+          type:'info',
+          message:'已经在购物车'
+        })
       } else {
         let username = this.$store.state.common.user.username;
         let data = await this.$axios.get(
@@ -297,7 +303,10 @@ export default {
         });
         console.log(oo);
         if (oo === id) {
-          alert("已经再购物车");
+           this.$message({
+          type:'info',
+          message:'已经在购物车'
+        })
         }
          else {
           console.log("djaskldjsalkjdlksajd");
@@ -318,11 +327,23 @@ export default {
                 username
               }
             });
-
+   this.$message({
+          type:'info',
+          message:'加入成功'
+        })
             // console.log(this.$store);
           });
         }
       }
+
+      }catch{
+        this.$message({
+          type:'info',
+          message:'请先登录'
+        })
+      
+      }
+
     },
 
     goto(path) {

@@ -3,7 +3,7 @@
     <p
       style="position: relative;font-size: 0.85333333rem;padding: 0.64rem 1.06666667rem;text-align: center;font-weight: 500;background: white;"
     >
-      <span
+      <span @click="goto('/cart')"
         class="el-icon-arrow-left"
         style="position: relative;display: block;float: left;font-size: 0.85333333rem;top: 0.10666667rem;"
       ></span>
@@ -19,7 +19,7 @@
       支付金额：
       <span style="font-size: 14px;
     color: #fa6969;
-    display: inline;">￥29.90</span>
+    display: inline;">￥{{this.$route.params.num}}</span>
     </div>
 
     <p
@@ -135,7 +135,16 @@ padding-left: 0.53333333rem;"
 
 
 <script>
-export default {};
+export default {
+  created(){
+    console.log('pppppp:',this.$route.params.num)
+  },
+  methods:{
+    goto(path){
+      this.$router.push(path)
+    }
+  }
+};
 </script>
 
 

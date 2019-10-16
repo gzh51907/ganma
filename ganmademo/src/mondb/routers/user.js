@@ -30,7 +30,7 @@ Router.post('/reg', async (req, res) => {
 
 Router.get('/check', async (req, res) => {
     let { username } = req.query;
-
+    console.log('llll:',username)
     let result = await mongo.find(colName, { username });
     if (result.length) {
         res.send(formatData({ code: 0 }))// {code:1,msg:'success',data}
