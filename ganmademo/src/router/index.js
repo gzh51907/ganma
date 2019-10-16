@@ -102,7 +102,7 @@ let router = new VueRouter({
     //订单
     {
         name: 'order',
-        path: '/order',
+        path: '/order/:id',
         component: Order
     }
     ]
