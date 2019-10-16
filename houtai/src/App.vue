@@ -6,9 +6,12 @@
         <ul class="headernav fl">
           <li>
             欢迎你
-            <span>admian</span>
+            <template v-if="!currentUser">
+            <span>xxx</span>
+            </template>
+            <span v-else>{{currentUser}}</span>
           </li>
-          <li>退出登录</li>
+          <li @click="logout">退出登录</li>
         </ul>
       </el-header>
       <el-container class="contain">
@@ -41,7 +44,29 @@
 
 <script>
 export default {
-  components: {}
+  components: {},
+  data() {
+    return{
+
+    }
+  },
+  computed : {
+    currentUser() {
+        let user = localStorage.getItem('username');
+    
+
+      console.log('user:',user);
+      return user;
+    }
+  } ,
+  methods : {
+    logout() {
+      localStorage.removeItem('username');
+      
+      this.$router.push('/login'); this.$router.go(0)
+    }
+  }
+   
 };
 </script>
 
@@ -69,7 +94,7 @@ li {
   float: right;
 }
 .el-collapse-item__header{
-  background: red !important;
+  background: rgba(255, 0, 0, 0.486) !important;
 }
 .el-collapse-item__content{
   padding: 0 !important;
@@ -117,7 +142,7 @@ li {
       .main{
           overflow-x: hidden;
           overflow-y: scroll;
-          background: #ccc;
+          background:white;
       }
     }
   }

@@ -10,19 +10,21 @@
                 <label for="" style="color: #B2DFEE">登录账号</label>
                 <div class="username clearfix">
                     <span class="span1"></span>
-                    <input type="text" id="usm" placeholder="admin" autocomplete="off">
+                    <input type="text" id="usm" placeholder="admin" autocomplete="off"
+                    v-model="username">
                 </div>
             </div>
             <div class="control-grounp2">
                     <label for="" style="color: #B2DFEE">登录密码</label>
                     <div class="pass clearfix">
                         <span class="span2"></span>
-                        <input type="text" id="psw" autocomplete="off">
+                        <input type="password" id="psw" autocomplete="off"
+                        v-model="password">
                     </div>
             </div>
             <div class="anniu">
                 <a href="###" class="a1">忘记密码</a>
-                <a href="###" class="a2">登录</a>
+                <a href="###" class="a2" @click="login(username,password)">登录</a>
             </div>
         </form>
         <p>推荐使用webkit内核浏览器，如chrome等</p>
@@ -31,7 +33,33 @@
 </template>
 <script>
 export default {
-    
+    data(){
+        return{
+            username:'',
+            password:'',
+        }
+    },
+    methods:{
+       async login(username,password){
+        //    console.log('login:',username,password)
+           let {data} = await this.$axios.get('http://localhost:5200/admin/login',{
+               params:{
+                   username:username,
+                   password:password
+               }
+           })
+           console.log('data:',data)
+           if(data.code === 1) {
+            //    登录成功
+            localStorage.setItem('username',this.username);
+            this.$router.push('/home');
+           }else if(data.code === 0) {
+            //    登录失败
+            alert('用户名或密码不正确');
+           }
+       this.$router.go(0)
+        }
+    }
 }
 </script>
 

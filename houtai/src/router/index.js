@@ -10,6 +10,9 @@ import Login from '../pages/login.vue'
 
 import selectUser from '../pages/selectUser.vue'
 import orderList from '../pages/orderlist.vue'
+// 首页
+import Home from '../pages/Home.vue';
+
 //实例化vuerouter
 let router = new vueRouter({
     routes:[
@@ -40,8 +43,19 @@ let router = new vueRouter({
             path:'/order',
             component:orderList
 
+        },
+        {
+            // 后台首页
+            name : 'home',
+            path : '/home',
+            component : Home
         }
     ]
+});
+
+// 路由守卫
+router.beforeEach(async function(to,from,next) {
+    next()
 })
 
 export default router
