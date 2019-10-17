@@ -2,22 +2,26 @@
    <div>
        <div class="loginbox">
         <div class="loghead">
-            <h1>信息管理系统平台</h1>
+            <h1>赶马商城信息管理系统平台</h1>
             <span class="hcopy">版权所有 © 帅的网络科技有限公司 2015-2018</span>
         </div>
         <form action="" id="biaodan">
             <div class="control-grounp">
                 <label for="" style="color: #B2DFEE">登录账号</label>
-                <div class="username clearfix">
-                    <span class="span1"></span>
+                <div class="username clearfix" style="margin-top:8px">
+                    <span class="span1">
+                        <i class="el-icon-user"></i>
+                    </span>
                     <input type="text" id="usm" placeholder="admin" autocomplete="off"
                     v-model="username">
                 </div>
             </div>
             <div class="control-grounp2">
-                    <label for="" style="color: #B2DFEE">登录密码</label>
-                    <div class="pass clearfix">
-                        <span class="span2"></span>
+                    <label for="" style="color: #B2DFEE" >登录密码</label>
+                    <div class="pass clearfix" style="margin-top:8px">
+                        <span class="span2">
+                            <i class="el-icon-unlock"></i>
+                        </span>
                         <input type="password" id="psw" autocomplete="off"
                         v-model="password">
                     </div>
@@ -63,7 +67,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     * {
             margin: 0;
             padding: 0;
@@ -117,34 +121,57 @@ export default {
 
         .control-grounp,.control-grounp2 {
             padding: 10px 0;
+            
         }
 
         .span1,.span2 {
             display:block;
             float: left;
-            width: 30px;
+            width: 40px;
             height: 40px;
         }
         .span1{
+            
             background-color: #28b779;
      
             background-repeat: no-repeat;
             background-position: center center;
+            position: relative;
+            .el-icon-user{
+                color: #fff;
+                font-size: 24px;
+                position: absolute;
+                top : 50%;
+                left:50%;
+                transform: translate(-50%,-50%);
+            }
         }
         .span2{
             background-color: #ffb848;
          
             background-repeat: no-repeat;
             background-position: center center;
+            position: relative;
+            .el-icon-unlock{
+                color: #fff;
+                font-size: 24px;
+                position: absolute;
+                top : 50%;
+                left:50%;
+                transform: translate(-50%,-50%);
+            }
         }
         #usm,#psw{
             height: 40px;
             border: 0px;
             display: block;
-            width: 93%;
+            width: 90%;
             line-height: 28px;
             margin-bottom: 3px;
             float: left;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+          
         }
         .anniu{
             width: 100%;
