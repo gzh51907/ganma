@@ -70,7 +70,7 @@ let router = new vueRouter({
     ]
 });
 
-// 路由守卫
+// 路由守卫,
 router.beforeEach(async function (to, from, next) {
     if (to.meta.requirsAuth) {
         let user = localStorage.getItem('username');
