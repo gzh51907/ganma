@@ -22,7 +22,8 @@ export default {
         // background : #58c;
         // opacity: 0.6;
         .wenzi{
-            color:beige;
+            color:blue;
+            opacity: 0.6;
             font-size: 80px;
             position: absolute;
             top: 50%;

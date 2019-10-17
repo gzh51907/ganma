@@ -30,7 +30,8 @@
             </el-collapse-item>
             <el-collapse-item title="商品管理 commodity">
               <div class="menu">订单管理</div>
-              <div class="menu">商品管理</div>
+              <div class="menu" @click="go2goods('/goodsSearch')">商品信息管理</div>
+               <div class="menu" @click="go2goodsAdd('/goodsadd')">添加商品</div>
             </el-collapse-item>
           </el-collapse>
         </el-aside>
@@ -53,10 +54,8 @@ export default {
   computed : {
     currentUser() {
         let user = localStorage.getItem('username');
-    
-
-      console.log('user:',user);
-      return user;
+        // console.log('user:',user);
+        return user;
     }
   } ,
   methods : {
@@ -64,6 +63,12 @@ export default {
       localStorage.removeItem('username');
       
       this.$router.push('/login'); this.$router.go(0)
+    },
+    go2goods(path) {
+      this.$router.push(path);
+    },
+    go2goodsAdd(path) {
+      this.$router.push(path);
     }
   }
    
@@ -94,7 +99,7 @@ li {
   float: right;
 }
 .el-collapse-item__header{
-  background: rgba(255, 0, 0, 0.486) !important;
+  background: #666 !important;
 }
 .el-collapse-item__content{
   padding: 0 !important;
@@ -119,7 +124,7 @@ li {
           height: 100%;
           line-height: 50px;
           color: white;
-          border: 1px solid red;
+          border: 1px solid #2E363F;
           float: left;
           box-sizing: border-box;
           cursor: pointer;
@@ -130,13 +135,15 @@ li {
       width: 100%;
       .aside {
         height: 700px;
-        background: red;
+        background: #2E363F;
         .menu {
           width: 100%;
           height: 30px;
           line-height: 30px;
           border-bottom: 1px solid #cccccc;
-          background: aqua;
+          background: #2E363F;
+          color:#fff;
+          cursor: pointer;
         }
       }
       .main{
