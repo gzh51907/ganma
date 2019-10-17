@@ -19,7 +19,7 @@
             </tr>
           </thead>
           <tbody id="tbd">
-            <tr v-for="item in orderList.slice((currentPage-1)*pagesize,currentPage*pagesize)" :key="item.id">
+            <tr v-for="(item,ind) in orderList.slice((currentPage-1)*pagesize,currentPage*pagesize)" :key="ind">
               <td>{{item.username}}</td>
               <td>{{item.id}}</td>
               <td contenteditable="true">{{item.num}}</td>

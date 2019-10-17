@@ -15,47 +15,73 @@ import Home from '../pages/Home.vue';
 
 //实例化vuerouter
 let router = new vueRouter({
-    routes:[
+    routes: [
         {     // 查询商品
-            name : 'goodsSearch',
-            path : '/goodsSearch',
-            component : GoodsSearch
+            name: 'goodsSearch',
+            path: '/goodsSearch',
+            component: GoodsSearch,
+            meta:{
+                requirsAuth: true
+            }
         },
         {
             //添加商品
-            name : 'goodsadd',
-            path : '/goodsadd',
-            component : GoodsAdd},
-      {  name:'login',
-            path:'/login',
-            component:Login
+            name: 'goodsadd',
+            path: '/goodsadd',
+            component: GoodsAdd,
+            meta: {
+                requirsAuth: true
+            }
         },
         {
-            path:'/',
-            redirect:'/login'
+            name: 'login',
+            path: '/login',
+            component: Login
         },
         {
-            name:'select',
-            path:'/select',
-            component:selectUser
-        },{
-            name:'order',
-            path:'/order',
-            component:orderList
+            path: '/',
+            redirect: '/login'
+        },
+        {
+            name: 'select',
+            path: '/select',
+            component: selectUser,
+            meta: {
+                requirsAuth: true
+            }
+        }, {
+            name: 'order',
+            path: '/order',
+            component: orderList,
+            meta: {
+                requirsAuth: true
+            }
 
         },
         {
             // 后台首页
-            name : 'home',
-            path : '/home',
-            component : Home
+            name: 'home',
+            path: '/home',
+            component: Home,
+            meta: {
+                requirsAuth: true
+            }
         }
     ]
 });
 
 // 路由守卫
-router.beforeEach(async function(to,from,next) {
-    next()
+router.beforeEach(async function (to, from, next) {
+    if (to.meta.requirsAuth) {
+        let user = localStorage.getItem('username');
+        if (user) {
+            next()
+        } else {
+            next({ path: '/login' })
+        }
+    } else {
+        next()
+    }
 })
 
 export default router

@@ -108,57 +108,40 @@ export default {
       //校验整个表单
       this.$refs.regForm.validate(async valid => {
         if (valid) {
-
-
-
-
-
           let { username, password } = this.ruleForm;
-        let { data } = await this.$axios.get("http://localhost:5200/user/check", {
-        params: {
-          username,
-        }
-      });
-    
-    if(data.code==0){
-    this.$message({
-          type:'info',
-          message:'用户已存在'
-        })
-    }else{
-          let { data } = await this.$axios.post(
-            "http://localhost:5200/user/reg",
+          let { data } = await this.$axios.get(
+            "http://localhost:5200/user/check",
             {
-              username,
-              password
+              params: {
+                username
+              }
             }
           );
-          console.log("data:", data);
-          if (data.code === 1) {
-            this.$router.replace({ name: "login" });
-          } else {
+
+          if (data.code == 0) {
             this.$message({
               type: "info",
-              message: "注册失败"
+              message: "用户已存在"
             });
+          } else {
+            let { data } = await this.$axios.post(
+              "http://localhost:5200/user/reg",
+              {
+                username,
+                password
+              }
+            );
+            console.log("data:", data);
+            if (data.code === 1) {
+              this.$router.replace({ name: "login" });
+            } else {
+              this.$message({
+                type: "info",
+                message: "注册失败"
+              });
+            }
           }
-
-
-}
-
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        else {
+        } else {
           window.console.log("error submit!!");
           return false;
         }

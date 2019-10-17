@@ -26,10 +26,10 @@
               <div class="menu">修改密码</div>
             </el-collapse-item>
             <el-collapse-item title="用户管理 usermanagement">
-              <div class="menu">查询用户信息</div>
+              <div class="menu" @click="go2goods('/select')">查询用户信息</div>
             </el-collapse-item>
             <el-collapse-item title="商品管理 commodity">
-              <div class="menu">订单管理</div>
+              <div class="menu" @click="go2goods('/order')">订单管理</div>
               <div class="menu" @click="go2goods('/goodsSearch')">商品信息管理</div>
                <div class="menu" @click="go2goodsAdd('/goodsadd')">添加商品</div>
             </el-collapse-item>
