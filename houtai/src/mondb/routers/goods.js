@@ -123,8 +123,9 @@ Router.post('/add', async (req, res) => {
 // console.log('req:',req.body)
     let { brand,brand_id,name,id,markers_price,sell_price,number } = req.body;
 
-    let result = await mongo.find('goodsinf',{'brand_id':Number(brand_id),'id':Number(id)});
-    // console.log('res:',result.length);
+    let result = await mongo.find('goodsinf',{'brand_id':brand_id,'id':id});
+    console.log('res:', brand_id,id);
+    console.log('res1:', result);
     if(result.length) {
         res.send(formatData({code:0}))
     }else{
