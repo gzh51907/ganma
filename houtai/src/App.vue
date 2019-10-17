@@ -54,7 +54,7 @@ export default {
   computed : {
     currentUser() {
         let user = localStorage.getItem('username');
-        // console.log('user:',user);
+
         return user;
     }
   } ,
