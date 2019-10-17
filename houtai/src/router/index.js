@@ -19,13 +19,21 @@ let router = new vueRouter({
         {     // 查询商品
             name : 'goodsSearch',
             path : '/goodsSearch',
-            component : GoodsSearch
+            component : GoodsSearch,
+            meta:{
+                requirsAuth: true
+            }
         },
         {
             //添加商品
             name : 'goodsadd',
             path : '/goodsadd',
-            component : GoodsAdd},
+            component : GoodsAdd,
+            meta:{
+                requirsAuth: true
+            }
+        },
+            
       {  name:'login',
             path:'/login',
             component:Login
@@ -37,25 +45,43 @@ let router = new vueRouter({
         {
             name:'select',
             path:'/select',
-            component:selectUser
+            component:selectUser,
+            meta:{
+                requirsAuth: true
+            }
+
         },{
             name:'order',
             path:'/order',
-            component:orderList
-
+            component:orderList,
+            meta:{
+                requirsAuth: true
+            }
         },
         {
             // 后台首页
             name : 'home',
             path : '/home',
-            component : Home
+            component : Home,
+            meta:{
+                requirsAuth: true
+            }
         }
     ]
 });
 
 // 路由守卫
 router.beforeEach(async function(to,from,next) {
-    next()
+    if(to.meta.requirsAuth){
+        let user = localStorage.getItem('username');
+        if(user){
+            next()
+        }else{
+            next({path:'/login'})
+        }
+    }else{
+        next()
+    }
 })
 
 export default router
