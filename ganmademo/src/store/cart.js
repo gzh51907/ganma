@@ -81,7 +81,7 @@ let cart = {
             state.cartlist.forEach(async item => {
                 if (item.id == id) {
                     item.num++
-                    let data = await axios.post("http://localhost:5200/goods/dingdan", {
+                    let data = await axios.post("http://106.53.2.52:5200/goods/dingdan", {
                         username,
                         id: id,
                         num: item.num
@@ -100,7 +100,7 @@ let cart = {
             state.cartlist.forEach(async item => {
                 if (item.id == id) {
                     item.num--
-                    let data = await axios.post("http://localhost:5200/goods/dingdan", {
+                    let data = await axios.post("http://106.53.2.52:5200/goods/dingdan", {
                         username,
                         id: id,
                         num: item.num

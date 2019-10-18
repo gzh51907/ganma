@@ -262,7 +262,7 @@ export default {
   async created() {
     let id = this.$router.history.current.params.id;
 
-    let data = await this.$axios.get("http://localhost:5200/goods/ll", {
+    let data = await this.$axios.get("http://106.53.2.52:5200/goods/ll", {
       params: {
         id: id
       }
@@ -290,7 +290,7 @@ export default {
       } else {
         let username = this.$store.state.common.user.username;
         let data = await this.$axios.get(
-          "http://localhost:5200/goods/cartpeople",
+          "http://106.53.2.52:5200/goods/cartpeople",
           {
             params: {
               username: username
@@ -320,7 +320,7 @@ export default {
             };
             this.$store.commit("add2cart", goods);
             let username = this.$store.state.common.user.username;
-            let data = this.$axios.get("http://localhost:5200/goods/charu", {
+            let data = this.$axios.get("http://106.53.2.52:5200/goods/charu", {
               params: {
                 id: id,
                 num: 1,

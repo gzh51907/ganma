@@ -59,7 +59,7 @@ export default {
 
     //校验用户名是否存在
     const checkUsername = async (rule, value, callback) => {
-      let { data } = await this.$axios.get("http://localhost:5200/user/check", {
+      let { data } = await this.$axios.get("http://106.53.2.52:5200/user/check", {
         params: {
           username: this.ruleForm.username
         }
@@ -110,7 +110,7 @@ export default {
         if (valid) {
           let { username, password } = this.ruleForm;
           let { data } = await this.$axios.get(
-            "http://localhost:5200/user/check",
+            "http://106.53.2.52:5200/user/check",
             {
               params: {
                 username
@@ -125,7 +125,7 @@ export default {
             });
           } else {
             let { data } = await this.$axios.post(
-              "http://localhost:5200/user/reg",
+              "http://106.53.2.52:5200/user/reg",
               {
                 username,
                 password

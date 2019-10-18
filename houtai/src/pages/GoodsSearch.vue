@@ -97,7 +97,7 @@ export default {
         // console.log(index, row.number);
         let {id} = row;
      
-        let {data} = await this.$axios.post('http://localhost:5200/goods/goodsUpdate',{
+        let {data} = await this.$axios.post('http://106.53.2.52:5200/goods/goodsUpdate',{
           params : {
             id,
             name : name.innerHTML,
@@ -131,7 +131,7 @@ export default {
       async handleDelete(index, row) {
         // console.log(index, row);
         let {id} = row;
-        let {data} = await this.$axios.post('http://localhost:5200/goods/goodsDel',{
+        let {data} = await this.$axios.post('http://106.53.2.52:5200/goods/goodsDel',{
           params : {
             id
           }
@@ -164,7 +164,7 @@ export default {
       }
     },
     async created() {
-      let {data} = await this.$axios.get('http://localhost:5200/goods/all')
+      let {data} = await this.$axios.get('http://106.53.2.52:5200/goods/all')
       // console.log('dataall:',data);
       this.tableData = data.map(item => {
         return item

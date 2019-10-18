@@ -26,6 +26,7 @@ import store from '../store';
 import Order from '../pages/Order.vue'
 //这里面可以添加要跳转的路径
 let router = new VueRouter({
+    mode: 'history',
     routes: [{
         name: 'housing',
         path: '/housing',

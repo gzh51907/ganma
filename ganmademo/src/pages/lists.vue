@@ -88,7 +88,7 @@ export default {
   async created() {
     let { id } = this.$route.params;
 
-    let data = await this.$axios.get("http://localhost:5200/goods/select", {
+    let data = await this.$axios.get("http://106.53.2.52:5200/goods/select", {
       params: {
         brand_id: id
       }
@@ -110,7 +110,7 @@ console.log(id)
       if (this.num == true) {
         let { id } = this.$route.params;
 
-        let data = await this.$axios.get("http://localhost:5200/goods/sel", {
+        let data = await this.$axios.get("http://106.53.2.52:5200/goods/sel", {
           params: {
             brand_id: id
           }
@@ -122,7 +122,7 @@ console.log(id)
       } else {
         let { id } = this.$route.params;
    
-        let data = await this.$axios.get("http://localhost:5200/goods/sels", {
+        let data = await this.$axios.get("http://106.53.2.52:5200/goods/sels", {
           params: {
             brand_id: id
           }
@@ -140,7 +140,7 @@ console.log(id)
     async zuixin() {
       let { id } = this.$route.params;
 
-      let data = await this.$axios.get("http://localhost:5200/goods/selss", {
+      let data = await this.$axios.get("http://106.53.2.52:5200/goods/selss", {
         params: {
           brand_id: id
         }
@@ -156,7 +156,7 @@ console.log(id)
     async xiao() {
       let { id } = this.$route.params;
   
-      let data = await this.$axios.get("http://localhost:5200/goods/selsss", {
+      let data = await this.$axios.get("http://106.53.2.52:5200/goods/selsss", {
         params: {
           brand_id: id
         }
@@ -171,7 +171,7 @@ console.log(id)
     async zong() {
       let { id } = this.$route.params;
 
-      let data = await this.$axios.get("http://localhost:5200/goods/select", {
+      let data = await this.$axios.get("http://106.53.2.52:5200/goods/select", {
         params: {
           brand_id: id
         }

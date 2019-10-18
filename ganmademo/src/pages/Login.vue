@@ -78,7 +78,7 @@ export default {
           // localStorage.setItem("user", username);
 
           let { data } = await this.$axios.get(
-            "http://localhost:5200/user/login",
+            "http://106.53.2.52:5200/user/login",
             {
               params: {
                 username,

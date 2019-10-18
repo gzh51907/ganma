@@ -15,12 +15,13 @@ import Home from '../pages/Home.vue';
 
 //实例化vuerouter
 let router = new vueRouter({
+    mode: 'history',
     routes: [
         {     // 查询商品
             name: 'goodsSearch',
             path: '/goodsSearch',
             component: GoodsSearch,
-            meta:{
+            meta: {
                 requirsAuth: true
             }
         },

@@ -57,7 +57,7 @@ async function remove(colName, query) {
 //改
 async function update(colName, query,data) {
     // return query
-    console.log(query,'ppppp',data,'llll')
+ 
     let { db, client } = await connect();
     // 获取集合
     let col = db.collection(colName);
@@ -74,7 +74,7 @@ async function update(colName, query,data) {
 async function find(colName, query = {}) {
     let { db, client } = await connect();
     let col = db.collection(colName);
-    console.log(query);
+  
 
     // 查询数据库
     let result = await col.find(query).toArray();
@@ -141,7 +141,7 @@ async function paiss(colName, query = {}) {
 async function paisss(colName, query = {}) {
     let { db, client } = await connect();
     let col = db.collection(colName);
-    console.log(query);
+
 
     // 查询数据库
     let result = await col.find(query).sort({ number: 1 }).toArray();
@@ -158,7 +158,7 @@ async function paisss(colName, query = {}) {
 async function lp(colName, query = {}) {
     let { db, client } = await connect();
     let col = db.collection(colName);
-    console.log(query);
+  
 
     // 查询数据库
     let result = await col.find(query).toArray();

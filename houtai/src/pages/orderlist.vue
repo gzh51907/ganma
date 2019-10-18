@@ -57,7 +57,7 @@ export default {
     };
   },
   async created() {
-    let { data } = await this.$axios.get("http://localhost:5200/shoping/order");
+    let { data } = await this.$axios.get("http://106.53.2.52:5200/shoping/order");
     this.orderList = data;
   },
   methods:{
@@ -71,22 +71,14 @@ export default {
     },
     //删除当行
      async delet(id){
-            let {data} = await this.$axios.post('http://localhost:5200/shoping/del',{
+            let {data} = await this.$axios.post('http://106.53.2.52:5200/shoping/del',{
                 params:{
                     id:id
                 }
             })
             this.$router.go(0)
         },
-    //修改数量
-    // async change(num,id){
-    //     await this.$axios.get('http://localhost:5200/shoping/change',{
-    //       params:{
-    //         num:num,
-    //         id:id
-    //       }
-    //     })
-    // }
+
   }
 };
 </script>

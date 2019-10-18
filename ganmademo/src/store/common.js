@@ -37,7 +37,7 @@ export default {
             }else {
                 user = JSON.parse(user);
            
-                let {data} = await axios.get('http://localhost:5200/verify',{
+                let { data } = await axios.get('http://106.53.2.52:5200/verify',{
                     // 请求头
                     headers : {
                         Authorization : user.Authorization

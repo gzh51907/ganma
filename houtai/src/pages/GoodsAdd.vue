@@ -71,7 +71,7 @@ export default {
       async Add() {
         //   console.log('ss:',this.$refs.form.model)
         let {brand,brand_id,name,id,markers_price,sell_price,number} = this.$refs.form.model;
-        let {data} = await this.$axios.post('http://localhost:5200/goods/add',{
+        let {data} = await this.$axios.post('http://106.53.2.52:5200/goods/add',{
             
                 brand,
                 brand_id,
