@@ -46,7 +46,7 @@ export default {
     methods:{
        async login(username,password){
         //    console.log('login:',username,password)
-           let {data} = await this.$axios.get('http://localhost:5200/admin/login',{
+           let {data} = await this.$axios.get('http://106.53.2.52:5200/admin/login',{
                params:{
                    username:username,
                    password:password

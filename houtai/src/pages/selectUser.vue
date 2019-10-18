@@ -57,12 +57,12 @@
       }
     },
    async created(){
-       let {data} = await this.$axios.get('http://localhost:5200/user/all')
+       let {data} = await this.$axios.get('http://106.53.2.52:5200/user/all')
         this.userlist = data
     },
     methods:{
        async delet(username){
-            let {data} = await this.$axios.post('http://localhost:5200/user/del',{
+            let {data} = await this.$axios.post('http://106.53.2.52:5200/user/del',{
                 params:{
                     username:username
                 }
