@@ -101,7 +101,7 @@ export default {
     //  }
     this.$store.state.cart.cartlist = [];
     let username = this.$store.state.common.user.username;
-    let data = await this.$axios.get("http://localhost:5200/goods/cartpeople", {
+    let data = await this.$axios.get("http://106.53.2.52:5200/goods/cartpeople", {
       params: {
         username: username
       }
@@ -109,7 +109,7 @@ export default {
     data.data.forEach(async item => {
       let sho = item.id;
 
-      let data1 = await this.$axios.get("http://localhost:5200/goods/ll", {
+      let data1 = await this.$axios.get("http://106.53.2.52:5200/goods/ll", {
         params: {
           id: sho
         }
