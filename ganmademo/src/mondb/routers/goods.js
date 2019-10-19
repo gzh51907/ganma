@@ -55,6 +55,24 @@ Router.get('/select', async (req, res) => {
 })
 
 
+//插入
+Router.post('/tou', async (req, res) => {
+
+    let { username, imgData } = req.body;
+    console.log('sadsadsadsad:', username, imgData )
+
+    let result
+    try {
+        await mongo.create('tou', [{ username, imgData }]);
+        result = formatData()
+    } catch (err) {
+        result = formatData({ code: 0 })
+    }
+
+    res.send(result);
+
+});
+
 
 
 //降序
@@ -183,4 +201,9 @@ Router.post('/dingdan', async (req, res) => {
         res.send(formatData());
     }
 });
+
+
+
+
+
 module.exports = Router;

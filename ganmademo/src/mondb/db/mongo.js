@@ -170,6 +170,13 @@ async function lp(colName, query = {}) {
 }
 
 
+
+
+
+
+
+
+
 module.exports = {
     lp,
     paisss,

@@ -147,8 +147,7 @@ export default {
             message:'删除失败'
           })
         }
-        // console.log('data:',data)
-        this.$router.go(0);
+  
         
       },
 
@@ -164,6 +163,15 @@ export default {
       }
     },
     async created() {
+      let {data} = await this.$axios.get('http://localhost:5200/goods/all')
+      // console.log('dataall:',data);
+      this.tableData = data.map(item => {
+        return item
+        // console.log(item)
+      })
+      // console.log('dadada:',this.tableData.length)
+    },
+      async updated() {
       let {data} = await this.$axios.get('http://localhost:5200/goods/all')
       // console.log('dataall:',data);
       this.tableData = data.map(item => {

@@ -60,6 +60,10 @@ export default {
     let { data } = await this.$axios.get("http://localhost:5200/shoping/order");
     this.orderList = data;
   },
+     async updated(){
+         let { data } = await this.$axios.get("http://localhost:5200/shoping/order");
+    this.orderList = data;
+     },
   methods:{
     //分页-每页条数
     handleSizeChange(val){
@@ -76,8 +80,9 @@ export default {
                     id:id
                 }
             })
-            this.$router.go(0)
+            // this.$router.go(0)
         },
+     
     //修改数量
     // async change(num,id){
     //     await this.$axios.get('http://localhost:5200/shoping/change',{
